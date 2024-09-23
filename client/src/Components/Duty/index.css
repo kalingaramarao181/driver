@@ -1,0 +1,20 @@
+.duty-container{
+    padding: 10px;
+}
+.trips-title{
+    font-size: 40px;
+    font-family: "Roboto";
+    margin: 10px;
+    text-align: center;
+}
+.trip-table{
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 15px;
+}
+.car-image-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}

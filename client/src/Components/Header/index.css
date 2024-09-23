@@ -1,0 +1,207 @@
+.nav{
+    background-color: #36366f;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-right: 24px;
+    align-items: center;
+    height: 70px;
+  }
+
+  /* Switch */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    margin-right: 20px;
+  }
+  
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider-check:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  .slider-check:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  .slider-check:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+  /* Switch */
+
+  .slider-notification-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .nav-Home{
+    color: white;
+    text-decoration: none;
+    font-size: 1.6vw;
+    font-family: roboto;
+  }
+  .nav-Home-logo{
+    font-weight: 600;
+    width: 5vw;
+    text-align: center;
+    text-decoration: none;
+    font-family: "cursive";
+    cursor: pointer;
+  }
+  .app-logo{
+    height: 6vh;
+    width: 9vw;
+    border-radius: 5px;
+  }
+  .home-notification-button{
+    color: white;
+    text-decoration: none;
+    font-size: 34px;
+    font-family: roboto;
+    font-weight: bold;
+    background-color: transparent;
+    border : none;
+    cursor: pointer;
+    margin: 0px;
+  }
+  .sidebar {
+    width: 30vw;
+    height: 50%;
+    background-color: #ebeaea;
+    position: fixed;
+    top: 10;
+    right: -30vw; /* Initially hide the sidebar on the right side */
+    transition: right 0.5s ease;
+    border-radius: 10px; /* Apply transition effect to right property */
+  }
+  
+  .sidebar.open {
+    right: 0; /* Move sidebar to the right when open */
+  }
+  
+  .navButton {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* Adjust button position */
+  }
+  .home-sidebar-container{
+    display: flex;
+    flex-direction: column;
+    padding-left: 24px;
+    border-radius: 10px;
+    height: 300px;
+    overflow-y: auto;
+    list-style-type: none;
+    margin-left: 0px;
+  }
+  .home-sidebar-container::-webkit-scrollbar-thumb {
+    background: rgb(1, 18, 77);
+    border-radius: 10px;
+}
+
+/* 16 */
+.home-sidebar-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* 16 */
+.home-sidebar-container::-webkit-scrollbar {
+    width: 3px;
+}
+  .home-sidebar-top-container{
+    align-self: flex-end;
+  }
+  .note-title{
+    text-align: center;
+    font-family: "Roboto";
+    margin: 0px;
+  }
+  .home-sidebar-bottom-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    height: 30vh;
+  }
+  .home-sidebar-descreption{
+    text-align: center;
+    font-size: 1.5vw;
+    color: white;
+  }
+  .home-sidebar-signup-button{
+    border: none;
+    height: 5vh;
+    border-radius: 5px;
+    width: 10vw;
+    color: white;
+    background-color: #9B5706;
+  }
+  .home-sidebar-span{
+    color: white;
+  }
+  .home-sidebar-login-button{
+    background-color: transparent;
+    padding: 1px;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid white;
+    margin-left: 0.8vw;
+  }
+  button{
+    cursor: pointer;
+  }
+  .note-message{
+    font-size: 12px;
+    background-color: white;
+    margin-bottom: 3px;
+    padding: 5px;
+    border-radius: 10px;
+    list-style-type: none;
+    margin-right: 10px;
+  }
