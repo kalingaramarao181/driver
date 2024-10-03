@@ -1,5 +1,6 @@
 .nav{
-    background-color: #36366f;
+  background-image: radial-gradient(rgb(42, 77, 233),  #382ef8);
+  background-color: #382ef8;
     display: flex;
     justify-content: space-between;
     padding-left: 24px;
@@ -108,7 +109,13 @@
     border : none;
     cursor: pointer;
     margin: 0px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added smooth transition */
   }
+  .home-notification-button:hover{
+    transform: scale(1.2); /* Expands the row slightly */
+  }
+  
+  
   .sidebar {
     width: 30vw;
     height: 50%;
@@ -204,4 +211,20 @@
     border-radius: 10px;
     list-style-type: none;
     margin-right: 10px;
+  }
+  @media only screen and (max-width: 1024px) {
+
+  }
+  
+  @media only screen and (max-width: 768px) {
+    .sidebar {
+      width: 80vw;
+      height: 57%;
+      background-color: #ebeaea;
+      position: fixed;
+      top: 10;
+      right: -80vw; /* Initially hide the sidebar on the right side */
+      transition: right 0.5s ease;
+      border-radius: 10px; /* Apply transition effect to right property */
+    }
   }

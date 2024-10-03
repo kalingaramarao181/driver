@@ -59,7 +59,7 @@ const Duty = () => {
     <div className="duty-container">
       <h1 className="trips-title">TRIPS</h1>
       <table className="trip-table">
-        {tripData.map(eachTrip => <Trip trip={eachTrip}/>)}
+        {tripData.map((eachTrip, index) => <Trip key={index} trip={eachTrip}/>)}
       </table>
     </div>
   );

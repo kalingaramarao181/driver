@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useDeviceType } from "../Functions/deviceConverter";
 import Trip from "../Trip";
 import "./index.css"
 const FindingTrips = () => {

@@ -13,20 +13,18 @@ import { IoWalletOutline } from "react-icons/io5";
 import { MdOutlinePayments } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 
-import Cookies from "js-cookie";
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
 import Duty from "../Duty";
 import FindingTrips from "../FindingTrips";
 import Wallet from "../Wallet";
+import Payments from "../Payments";
+import Settings from "../Settings";
+import Feedback from "../FeedBack";
+import QrCodeGenerator from "../UpiPayments";
 
 const User = (props) => {
   const [sidebarButtonStatus, setSidebarButtonStatus] = useState("Wallet");
-  const { isMobile, isTablet, isDesktop } = useDeviceType();
-
-  const onClickLogout = () => {
-    Cookies.remove("adminToken");
-    props.history.replace("/");
-  };
+  const { isTablet, isDesktop } = useDeviceType();
 
   const renderContent = () => {
     if (sidebarButtonStatus === "Duty") {
@@ -35,10 +33,14 @@ const User = (props) => {
       return <FindingTrips />;
     } else if (sidebarButtonStatus === "Wallet") {
       return <Wallet />;
-    } else if (sidebarButtonStatus === "Payouts") {
-      return <h1>ClientData</h1>;
-    } else if (sidebarButtonStatus === "Admin") {
-      return <h1>No Data</h1>;
+    } else if (sidebarButtonStatus === "Payments") {
+      return <Payments />;
+    }else if (sidebarButtonStatus === "Settings") {
+      return <Settings setSidebarButtonStatus={setSidebarButtonStatus}/>;
+    } else if (sidebarButtonStatus === "Feedback") {
+      return <Feedback />;
+    }else if (sidebarButtonStatus === "Upi") {
+      return <QrCodeGenerator />;
     }
   };
 
@@ -47,66 +49,61 @@ const User = (props) => {
       <div className="admin-sidebar">
         <div className="admin-buttons-container">
           <button className="admin-image-botton" onClick={() => setSidebarButtonStatus("Admin")}>
-            <img className="admin-image" src="https://www.payrollhub.in/static/images/admin.png"/>
+            <img className="admin-image" alt="profile" src="https://www.payrollhub.in/static/images/admin.png"/>
           </button>
           <div>
             <button
               style={{
                 backgroundColor:
-                  sidebarButtonStatus === "Duty" ? "#0E0C49" : "#030131",
+                  sidebarButtonStatus === "Duty" && "#3a31eb",
               }}
               onClick={() => setSidebarButtonStatus("Duty")}
               className="admin-sidebar-button"
             >
-              Duty
+              <PiSteeringWheelDuotone className="sidebar-icon" /> Duty
             </button>
             <button
               style={{
                 backgroundColor:
-                  sidebarButtonStatus === "FindingTrips"
-                    ? "#0E0C49"
-                    : "#030131",
+                  sidebarButtonStatus === "FindingTrips" && "#3a31eb",
               }}
               onClick={() => setSidebarButtonStatus("FindingTrips")}
               className="admin-sidebar-button"
             >
-              Finding Trips
+              <FaSearch className="sidebar-icon" /> Finding Trips
             </button>
             <button
               style={{
                 backgroundColor:
-                  sidebarButtonStatus === "Wallet" ? "#0E0C49" : "#030131",
+                  sidebarButtonStatus === "Wallet" && "#3a31eb",
               }}
               onClick={() => setSidebarButtonStatus("Wallet")}
               className="admin-sidebar-button"
             >
-              Wallet
+              <IoWalletOutline className="sidebar-icon" /> Wallet
             </button>
             <button
               style={{
                 backgroundColor:
-                  sidebarButtonStatus === "Payouts" ? "#0E0C49" : "#030131",
+                  sidebarButtonStatus === "Payments" && "#3a31eb",
               }}
-              onClick={() => setSidebarButtonStatus("Payouts")}
+              onClick={() => setSidebarButtonStatus("Payments")}
               className="admin-sidebar-button"
             >
-              Payouts
+              <MdOutlinePayments className="sidebar-icon" /> Payments
             </button>
             <button
               style={{
                 backgroundColor:
-                  sidebarButtonStatus === "Settings" ? "#0E0C49" : "#030131",
+                  sidebarButtonStatus === "Settings" && "#3a31eb",
               }}
               onClick={() => setSidebarButtonStatus("Settings")}
               className="admin-sidebar-button"
             >
-              Settings
+              <IoSettingsOutline className="sidebar-icon"/> Settings
             </button>
           </div>
         </div>
-        <button onClick={onClickLogout} className="admin-logout-button">
-          Logout
-        </button>
       </div>
     );
   };
@@ -115,35 +112,35 @@ const User = (props) => {
     return (
         <div className="page-item-footer">
             <button
-              style={{backgroundColor: sidebarButtonStatus === "Duty" && "black"}}
+              style={{fontWeight: sidebarButtonStatus === "Duty" && "bold", transform: sidebarButtonStatus === "Duty" && "scale(1.5)"}}
               onClick={() => setSidebarButtonStatus("Duty")}
               className="admin-footer-button"
             >
               <PiSteeringWheelDuotone />
             </button>
             <button
-              style={{backgroundColor: sidebarButtonStatus === "FindingTrips" && "black"}}
+              style={{fontWeight: sidebarButtonStatus === "FindingTrips" && "bold", transform: sidebarButtonStatus === "FindingTrips" && "scale(1.5)"}}
               onClick={() => setSidebarButtonStatus("FindingTrips")}
               className="admin-footer-button"
             >
                 <FaSearch />
             </button>
             <button
-             style={{backgroundColor: sidebarButtonStatus === "Wallet" && "black"}}
+             style={{fontWeight: sidebarButtonStatus === "Wallet" && "bold", transform: sidebarButtonStatus === "Wallet" && "scale(1.5)"}}
               onClick={() => setSidebarButtonStatus("Wallet")}
               className="admin-footer-button"
             >
               <IoWalletOutline />
             </button>
             <button
-              style={{backgroundColor: sidebarButtonStatus === "Payouts" && "black"}}
-              onClick={() => setSidebarButtonStatus("Payouts")}
+              style={{fontWeight: sidebarButtonStatus === "Payments" && "bold", transform: sidebarButtonStatus === "Payments" && "scale(1.5)"}}
+              onClick={() => setSidebarButtonStatus("Payments")}
               className="admin-footer-button"
             >
               <MdOutlinePayments />
             </button>
             <button
-              style={{backgroundColor: sidebarButtonStatus === "Settings" && "black"}}
+              style={{fontWeight: sidebarButtonStatus === "Settings" && "bold", transform: sidebarButtonStatus === "Settings" && "scale(1.5)"}}
               onClick={() => setSidebarButtonStatus("Settings")}
               className="admin-footer-button"
             >

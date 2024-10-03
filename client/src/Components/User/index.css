@@ -21,7 +21,7 @@
   .admin-sidebar {
     width: 16vw;
     padding: 1vw;
-    background-color: #030131;
+    background-image: radial-gradient(rgb(103, 130, 250) 10%,  #140cad);
     font-family: "Roboto";
     font-size: 1.6vw;
     flex-shrink: 0;
@@ -40,7 +40,7 @@
   }
   
   .page-footer {
-    background-color: #0d2436;
+    background-color: #0782e0;
     font-family: "Roboto";
     font-size: 1.6vw;
     color: white;
@@ -50,10 +50,15 @@
     justify-content: space-between;
     align-items: center;
     height: 3vh;
+    border-radius: 20px;
+    margin: 10px;
+    position: fixed;
+    width: 95vw;
+    bottom: 0;
   }
 
   .page-item-footer{
-    background-color: #0d2436;
+    background-image: radial-gradient(rgb(103, 130, 250) 10%,  #352bf0);
     font-family: "Roboto";
     color: white;
     padding: 1vw;
@@ -66,11 +71,24 @@
     background-color: transparent;
     border: none;
     font-size: 1.5vw;
+    border-radius: 10px;
     padding: 1vw;
     margin-bottom: 1vh;
     color: white;
     width: 16vw;
     text-align: left;
+    display: flex;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added smooth transition */
+  }
+
+  .admin-sidebar-button:hover{
+    background-color: #3a31eb;
+    transform: scale(1.05); /* Expands the row slightly */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
+  }
+  .sidebar-icon{
+    margin-right: 10px;
   }
   
   .admin-footer-button{
@@ -83,6 +101,10 @@
     width: 50px;
     text-align: center;
     padding-top: 7px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .admin-footer-button:hover{
+    transform: scale(1.5);
   }
   .social-icon{
     margin-right: 0.5vw;
@@ -108,9 +130,15 @@
     border: none;
     border-radius: 5px;
     font-size: 1.5vw;
-    width: 10vw;
+    width: 8vw;
     height: 5vh;
     align-self: flex-end;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added smooth transition */
+  }
+  .admin-logout-button:hover{
+    background-color: #990e0e;
+    transform: scale(1.05); /* Expands the row slightly */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
   }
   .admin-cards-container{
     width: 80vw;

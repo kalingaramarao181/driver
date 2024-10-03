@@ -1,9 +1,21 @@
-.table-row{
-    background-color: rgb(209, 209, 209);
-    border-bottom: 2px solid white;
+.table-row {
+    border-bottom: 5px solid white;
+    background-image: radial-gradient(rgb(178, 189, 240) 10%, #d0cef5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added smooth transition */
 }
-.table-row:hover{
-    background-color: rgb(225, 231, 231);
+
+.table-row:hover {
+    background-image: radial-gradient(rgb(197, 206, 248) 10%, #a39ff5);
+    transform: scale(1.05); /* Expands the row slightly */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
+}
+
+.action, .action-mobile {
+    transition: transform 0.3s ease, background-color 0.3s ease; /* Smooth transition for buttons */
+}
+
+.action:hover, .action-mobile:hover {
+    transform: scale(1.2); /* Slightly enlarges buttons when hovered */
 }
 
 .table-data{

@@ -1,0 +1,19 @@
+.payments-cards-container{
+    height: 520px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.payments-cards-container::-webkit-scrollbar-thumb {
+    background: rgb(1, 18, 77);
+    border-radius: 10px;
+}
+
+/* 16 */
+.payments-cards-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* 16 */
+.payments-cards-container::-webkit-scrollbar {
+    width: 3px;
+}

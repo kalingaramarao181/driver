@@ -1,0 +1,59 @@
+.qrcode-card-container{
+    border-radius: 10px;
+    padding: 10px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+.payment-input{
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 30px;
+    border-radius: 5px;
+    width: 200px;
+    margin-right: 5px;
+    border: 1px solid rgb(151, 146, 146);
+}
+.generate-qr-button{
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    color: rgb(31, 31, 180);
+}
+.arrow-button-container{
+    display: flex;
+}
+.qrcode-card{
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    font-size: 10px;
+}
+.qr-image{
+    height: 140px;
+}
+.paynow-button{
+    font-size: 14px;
+    background-color: blue;
+    color: white;
+    padding: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+@media only screen and (max-width: 480px) {
+    .arrow-button-container{
+        width: 100%;
+    }
+    .qrcode-card{
+        margin-left: 140px;
+    }
+}

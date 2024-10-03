@@ -7,17 +7,31 @@
 .selected-button{
     flex-grow: 1;
     font-size: 16px;
-    padding: 5px;
-    border: 1px solid black;
+    padding: 10px;
+    font-weight: bold;
+    font-family: "Roboto";
+    border: 1px solid rgb(88, 88, 252);
     background-color: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added smooth transition */
+}
+.selected-button:hover{
+    transform: scale(1.02); /* Expands the row slightly */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
+    border: none;
 }
 .selected-button-active{
     flex-grow: 1;
     font-size: 16px;
     padding: 5px;
-    background-color: rgb(33, 2, 105);
+    background-color: rgb(74, 7, 231);
     color: white;
-    border: 1px solid black;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added smooth transition */
+}
+.selected-button-active:hover{
+    transform: scale(1.05); /* Expands the row slightly */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow effect */
+    border: none;
 }
 .available{
     border-right: none;
