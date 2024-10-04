@@ -1,14 +1,15 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useContext } from "react";
 import { GoogleMap, useJsApiLoader, Marker } from "@react-google-maps/api";
 import { BiCurrentLocation } from "react-icons/bi";
 import { FaCopy } from "react-icons/fa";
 import { FiNavigation } from "react-icons/fi";
+import { UserContext } from "../Context/userContext";
 import "./index.css";
 
 // Style for the map container
 const containerStyle = {
   width: "100%",
-  height: "70vh", // Adjust the height as needed
+  height: "60vh", // Adjust the height as needed
 };
 
 // Initial center of the map (Visakhapatnam)
@@ -18,6 +19,8 @@ const center = {
 };
 
 const MapContainer = () => {
+
+  const {mapLocation} = useContext(UserContext)
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyAPRWC8FDqOSK5tQIoHHwD-aFHTxFqQXCA", // Replace with your API key
@@ -25,7 +28,7 @@ const MapContainer = () => {
 
   const [map, setMap] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(center);
-  const [markerPosition, setMarkerPosition] = useState(center);
+  const [markerPosition, setMarkerPosition] = useState(mapLocation);
 
   const onLoad = useCallback((map) => {
     const bounds = new window.google.maps.LatLngBounds();
@@ -81,6 +84,8 @@ const MapContainer = () => {
     };
     setMarkerPosition(clickedPosition);
     setCurrentLocation(clickedPosition); // Update currentLocation to the new position
+    console.log(JSON.stringify(clickedPosition));
+    
   };
 
   // Copy picked location to clipboard
@@ -105,7 +110,7 @@ const MapContainer = () => {
   if (loadError) return <div>Error loading maps</div>; // Error handling
 
   return isLoaded ? (
-    <div>
+    <div className="maps-main-container">
       <div className="maps-button-container-1">
         <input
           className="maps-search"
@@ -143,6 +148,7 @@ const MapContainer = () => {
           <FiNavigation />
         </button>
       </div>
+      
     </div>
   ) : (
     <div>Loading...</div>

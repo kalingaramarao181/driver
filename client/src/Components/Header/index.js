@@ -65,7 +65,7 @@ const Header = (props) => {
         >
             <h1 className="note-title">Notifications</h1>
           <ul className="home-sidebar-container">
-            {userNotifications.map(note => <li className="note-message">{note.message}</li>)}
+            {userNotifications.map((note, index) => <li key={index} className="note-message">{note.message}</li>)}
           </ul>
         </div>
       </>

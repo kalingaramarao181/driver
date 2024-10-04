@@ -5,7 +5,6 @@ import Header from './Components/Header';
 import Login from './Components/Login';
 import MapContainer from './Components/Maps'; // Import your MapContainer component
 import QrCodeGenerator from './Components/UpiPayments';
-import MobileLogin from './Components/MobileLogin';
 
 function App() {
   return (
@@ -16,7 +15,6 @@ function App() {
         <Route path='/login' exact component={Login} />
         <Route path='/maps' exact component={MapContainer} />
         <Route path='/upi' exact component={QrCodeGenerator} />
-        <Route path='/mobile-login' exact component={MobileLogin} />
       </Switch>
     </BrowserRouter>
   );

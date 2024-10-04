@@ -6,7 +6,10 @@ import QrCodeGenerator from "../UpiPayments";
 
 const Wallet = () => {
     const { isMobile, isTablet, isDesktop } = useDeviceType();
-    const [paymentStatus, setPaymentStatus] = useState(false)
+    const [paymentStatus, setPaymentStatus] = useState(false);
+    const [selectedOption, setSelectedOption] = useState("QRCode");
+
+
   const transactions = [
     {
       transactionId: "I1234D5",
@@ -69,6 +72,11 @@ const Wallet = () => {
         amount: "863.54",
       },
   ];
+
+  const handleOptionChange = (e) => {
+    setSelectedOption(e.target.value)
+  }
+
   return (
     <div>
       <div className="wallet-topbar-container">
@@ -90,19 +98,19 @@ const Wallet = () => {
             <div className="payment-card">
             <p className="payment-type-title">Use Payment Methods :</p>
               <div className="payment-type-card">
-                <label className="payment-type-name"><input className="payment-radio-button" type="radio"/> PayPal</label>
+                <label htmlFor="PayPal" className="payment-type-name"><input id="PayPal" value="PayPal" onChange={handleOptionChange} checked={selectedOption === "PayPal"} className="payment-radio-button" type="radio"/> PayPal</label>
                 <img alt="paypal" className="payment-card-image" src="https://i.pcmag.com/imagery/reviews/068BjcjwBw0snwHIq0KNo5m-15.fit_lim.size_1050x591.v1602794215.png"/>
               </div>
               <div className="payment-type-card">
-                <label className="payment-type-name"><input className="payment-radio-button" type="radio"/> Debit Card</label>
+                <label htmlFor="DebitCard" className="payment-type-name"><input id="DebitCard" value="DebitCard" onChange={handleOptionChange} checked={selectedOption === "DebitCard"} className="payment-radio-button" type="radio"/> Debit Card</label>
                 <img alt="paypal"  className="payment-card-image" src="https://www.visa.co.in/dam/VCOM/regional/ap/india/global-elements/images/in-visa-platinum-card-498x280.png"/>
               </div>
               <div className="payment-type-card">
-                <label className="payment-type-name"><input className="payment-radio-button" type="radio"/>Paytm</label>
+                <label htmlFor="Paytm" className="payment-type-name"><input id="Paytm" value="Paytm" onChange={handleOptionChange} checked={selectedOption === "Paytm"} className="payment-radio-button" type="radio"/>Paytm</label>
                 <img alt="paypal" className="payment-card-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTp2nUQCDvpxPI_8ak3xKwbITIVtTbIt-oEUA&s"/>
               </div>
               <div style={{borderBottom: "none", paddingTop:"16px"}} className="payment-type-card">   
-                <label className="payment-type-name"><input className="payment-radio-button" type="radio"/>Scan QR Code</label>
+                <label htmlFor="QRCode" className="payment-type-name"><input id="QRCode" value="QRCode" onChange={handleOptionChange} checked={selectedOption === "QRCode"} className="payment-radio-button" type="radio"/>Scan QR Code</label>
               </div>
             </div>
             <QrCodeGenerator />

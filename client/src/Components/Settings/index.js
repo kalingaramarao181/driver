@@ -7,8 +7,12 @@ import { MdOutlineSecurity } from "react-icons/md";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { MdOutlineContactSupport } from "react-icons/md";
 import { MdOutlineFeedback } from "react-icons/md";
+import { UserContext } from "../Context/userContext";
+import { useContext } from "react";
 
-const Settings = ({setSidebarButtonStatus}) => {
+const Settings = () => {
+
+    const {setSidebarButtonStatus} = useContext(UserContext)
     const features = [
         {
             featureId: "Duty",
@@ -39,7 +43,7 @@ const Settings = ({setSidebarButtonStatus}) => {
             featureName: "Support",
             featureIcon: MdOutlineContactSupport
         },{
-            featureId: "Payments",
+            featureId: "Feedback",
             featureName: "Feedback",
             featureIcon: MdOutlineFeedback
         },

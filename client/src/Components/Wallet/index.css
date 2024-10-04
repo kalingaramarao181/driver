@@ -84,6 +84,7 @@ p{
 }
 .payment-type-name{
     color: white;
+    cursor: pointer;
 }
 .payment-card-image{
     height: 30px;

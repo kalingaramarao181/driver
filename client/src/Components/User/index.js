@@ -20,10 +20,15 @@ import Wallet from "../Wallet";
 import Payments from "../Payments";
 import Settings from "../Settings";
 import Feedback from "../FeedBack";
+import MapContainer from "../Maps"
 import QrCodeGenerator from "../UpiPayments";
 
+import { UserContext } from "../Context/userContext";
+
 const User = (props) => {
-  const [sidebarButtonStatus, setSidebarButtonStatus] = useState("Wallet");
+  const [sidebarButtonStatus, setSidebarButtonStatus] = useState("Duty");
+  const [mapLocation, setMapLocation] = useState({lat:17.72834676147881,lng:83.30856055625414});
+
   const { isTablet, isDesktop } = useDeviceType();
 
   const renderContent = () => {
@@ -36,11 +41,14 @@ const User = (props) => {
     } else if (sidebarButtonStatus === "Payments") {
       return <Payments />;
     }else if (sidebarButtonStatus === "Settings") {
-      return <Settings setSidebarButtonStatus={setSidebarButtonStatus}/>;
+      return <Settings />;
     } else if (sidebarButtonStatus === "Feedback") {
       return <Feedback />;
     }else if (sidebarButtonStatus === "Upi") {
       return <QrCodeGenerator />;
+    }
+    else if (sidebarButtonStatus === "Maps") {
+      return <MapContainer />;
     }
   };
 
@@ -152,6 +160,7 @@ const User = (props) => {
 
 
   return (
+    <UserContext.Provider value={{ sidebarButtonStatus, setSidebarButtonStatus, mapLocation, setMapLocation }}>
     <div className="page-container">
       <div className="page-body">
         {(isTablet || isDesktop) && sidebarItems()}
@@ -170,6 +179,7 @@ const User = (props) => {
       </div>}
       {(!isTablet && !isDesktop) && sidebarItemsMobile()}
     </div>
+    </UserContext.Provider>
   );
 };
 

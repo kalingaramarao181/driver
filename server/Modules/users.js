@@ -66,7 +66,7 @@ router.get('/users/:id', (req, res) => {
 });
 
 //GET CHATTED USERS
-router.get('/chatted-users/:senderid', (req, res) => {
+router.get('/users/:senderid', (req, res) => {
     const { senderid } = req.params;
 
     const userSql = `

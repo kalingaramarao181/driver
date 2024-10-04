@@ -4,7 +4,7 @@ const db = require('../Config/connection');
 const upload = require('../Config/multer'); // Import multer middleware
 
 //GET MESSAGES USING USER_ID AND RECEIVER_ID
-router.get('/room-messages/:senderid/:roomid', (req, res) => {
+router.get('//:senderid/:', (req, res) => {
     const { roomid } = req.params;
 
     const query = `
@@ -49,7 +49,7 @@ router.post('/send-room-message', upload.single('file'), (req, res) => {
 });
 
 //DELETE USER MESSAGE
-router.post('/delete-room-message', (req, res) => {
+router.post('/delete-room', (req, res) => {
     const { messageId, userId } = req.body;
     const query = `
       UPDATE room_messages
@@ -66,7 +66,7 @@ router.post('/delete-room-message', (req, res) => {
 });
 
 //DELETE SELECTED MESSAGES
-router.post('/delete-selected-room-messages', (req, res) => {
+router.post('/delete-selected', (req, res) => {
     const { selectedIdsString, userId } = req.body;
 
     const ids = selectedIdsString.split(',').map(id => parseInt(id, 10));
