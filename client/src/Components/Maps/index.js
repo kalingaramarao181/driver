@@ -72,6 +72,7 @@ const MapContainer = () => {
 
   // Navigate to current location in Google Maps
   const navigateToCurrentLocation = () => {
+    // const url = `https://www.google.com/maps/dir/?api=1&destination=${currentLocation.lat},${currentLocation.lng}`
     const url = `https://www.google.com/maps/@${currentLocation.lat},${currentLocation.lng},15z`; // Adjust the zoom level
     window.open(url, "_blank"); // Open in a new tab
   };
@@ -82,7 +83,7 @@ const MapContainer = () => {
       lat: event.latLng.lat(),
       lng: event.latLng.lng(),
     };
-    setMarkerPosition(clickedPosition);
+    setMarkerPosition(mapLocation);
     setCurrentLocation(clickedPosition); // Update currentLocation to the new position
     console.log(JSON.stringify(clickedPosition));
     
@@ -103,6 +104,7 @@ const MapContainer = () => {
 
   // Navigate to picked location in Google Maps
   const navigateToPickedLocation = () => {
+    // const url = `https://www.google.com/maps?q=${currentLocation.lat},${currentLocation.lng}`
     const url = `https://www.google.com/maps/@${markerPosition.lat},${markerPosition.lng},15z`; // Adjust the zoom level
     window.open(url, "_blank"); // Open in a new tab
   };

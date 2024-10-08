@@ -1,0 +1,14 @@
+.services-page {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  
+  .service-section {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+  }
+  

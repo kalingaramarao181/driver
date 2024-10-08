@@ -1,0 +1,602 @@
+/* Carousel Container */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  margin-bottom: 0px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Carousel Inner Wrapper */
+.carousel-inner {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 1s ease; /* Smooth transition */
+}
+h2 {
+  margin-bottom: 10px;
+}
+
+.carousel-descreption {
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+.carousel-title {
+  font-size: 70px;
+  font-family: serif;
+  width: 60vw;
+  margin-bottom: 20px;
+}
+
+/* Individual Carousel Item */
+.carousel-item {
+  position: relative;
+  min-width: 100%;
+  height: 100%;
+}
+
+/* Carousel Image Styling */
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-caption-content {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  color: #fff;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding: 10px 20px;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  opacity: 1; /* Fade in the caption on hover */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 70px;
+}
+
+/* Caption Styling */
+.carousel-caption {
+  position: absolute;
+  bottom: 30px;
+  left: 50px;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding: 10px 20px;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.carousel-item:hover .carousel-caption {
+  opacity: 1; /* Fade in the caption on hover */
+}
+
+/* Button Styling */
+.prev-button,
+.next-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 16px;
+  cursor: pointer;
+  z-index: 1;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-sub-title {
+  font-family: monospace;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.cta-button,
+.cta-button-prev {
+  background-color: #ff5733;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 14px;
+  width: 200px;
+}
+.cta-button-prev {
+  background-color: rgb(19, 22, 211);
+}
+
+.cta-button:hover {
+  background-color: #e24b2d;
+}
+
+.prev-button {
+  right: 20px;
+  top: 45vh;
+}
+
+.next-button {
+  right: 20px;
+  top: 36vh;
+}
+
+.prev-button:hover,
+.next-button:hover {
+  background-color: orangered;
+}
+
+/* Marquee Styling */
+.announcement {
+  font-size: 20px;
+  color: #fff;
+  background-color: orangered;
+  padding: 10px 0;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.announcement-container {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  text-align: center;
+}
+
+/* Offer Section */
+.offer-section {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #f9f9f9;
+}
+
+.offer-cards {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.offer-card {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 30%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.offer-card h3 {
+  color: orangered;
+  font-size: 1.5em;
+}
+
+.offer-card p {
+  font-size: 1.1em;
+  color: #333;
+}
+
+.homepage {
+  text-align: center;
+  margin: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.announcement {
+  color: #fff;
+  padding: 10px;
+}
+
+.feature-cards-1 {
+  margin-top: 30px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.marque-features {
+  display: flex;
+  flex-direction: row;
+}
+
+.card-group-1 {
+  display: flex;
+  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Display 3 cards per row */
+  gap: 20px; /* Space between the cards */
+}
+
+.card-2 {
+  border: 1px solid #007bff;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-right: 10px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  flex-grow: 1;
+}
+.card-1 {
+  border: 1px solid #0d76ff;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 300px; /* Adjust the width as needed */
+  margin: 10px;
+}
+
+.card h3 {
+  margin: 0 0 10px;
+}
+
+.card-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.card-button:hover {
+  background: #0056b3;
+}
+.card-image {
+  width: 100%;
+  height: 260px;
+}
+p {
+  white-space: normal; /* Allows the text to wrap within the container */
+  word-wrap: break-word; /* Forces wrapping if necessary */
+}
+h3 {
+  white-space: normal; /* Allows the text to wrap within the container */
+  word-wrap: break-word; /* Forces wrapping if necessary */
+}
+
+@media only screen and (max-width: 768px) {
+  .card-group-1 {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .offer-cards {
+    gap: 5px;
+  }
+}
+
+/* About Page */
+
+/* General Layout */
+.about-section {
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  color: #333;
+  border-radius: 15px;
+}
+
+.about-header,
+.mission-section,
+.choose-us-section,
+.how-it-works-section,
+.driver-promise-section,
+.key-features-section,
+.testimonials-section,
+.call-to-action-section {
+  margin-bottom: 40px;
+}
+
+/* About Header */
+.about-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #50342c;
+  text-shadow: 2px 2px #ecf0f1;
+}
+
+.about-description {
+  font-size: 1.2rem;
+  text-align: center;
+  margin: 0 auto;
+  max-width: 800px;
+  color: #7f8c8d;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  border-radius: 8px;
+}
+
+/* Mission Section */
+.mission-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #34495e;
+  margin-bottom: 15px;
+}
+
+.mission-description {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Why Choose RideReady */
+.choose-us-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e74c3c;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.features-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.feature-item {
+  font-size: 1.1rem;
+  padding: 10px;
+  color: #fff;
+  background: #3498db;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.feature-item:hover {
+  background: #2980b9;
+}
+
+/* How it Works */
+.how-it-works-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #f39c12;
+  margin-bottom: 20px;
+}
+
+.steps-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.step {
+  background-color: #ecf0f1;
+  padding: 20px;
+  border: 2px solid #bdc3c7;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.step-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #16a085;
+  margin-bottom: 10px;
+}
+
+.step-description {
+  font-size: 1rem;
+  color: #34495e;
+  line-height: 1.5;
+}
+
+/* Driver Promise */
+.driver-promise-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e67e22;
+  margin-bottom: 15px;
+}
+
+.driver-promise-description {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  line-height: 1.6;
+}
+
+.driver-features-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.driver-feature-item {
+  margin-bottom: 20px;
+  background: #2c2c2c;
+  padding: 15px;
+  border-radius: 8px;
+  color: #2c3e50;
+}
+
+.driver-feature-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #e67e22;
+}
+
+.driver-feature-description {
+  font-size: 1rem;
+  color: #cfe5fa;
+}
+
+/* Key Features */
+.key-features-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1abc9c;
+  margin-bottom: 15px;
+}
+
+.key-features-list {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 20px;
+}
+
+.key-feature-item {
+  font-size: 1.1rem;
+  padding: 20px;
+  background-color: #9b59b6;
+  color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.key-feature-item:hover {
+  background-color: #8e44ad;
+  transform: translateY(-5px);
+}
+
+/* Testimonials */
+.testimonials-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2ecc71;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.testimonial {
+  background-color: #fff;
+  padding: 20px;
+  border: 2px solid #ecf0f1;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.testimonial:hover {
+  transform: scale(1.05);
+}
+
+.testimonial-text {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+.testimonial-author {
+  font-size: 1rem;
+  color: #34495e;
+  font-weight: bold;
+  text-align: right;
+}
+
+/* Call to Action */
+.call-to-action-section {
+  background-color: #000000;
+  color: #fff;
+  padding: 40px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.call-to-action-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.call-to-action-description {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+.call-to-action-button {
+  background-color: #f1c40f;
+  color: #333;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.call-to-action-button:hover {
+  background-color: #030303;
+}
+
+.testimonial-section {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #fff;
+  margin-bottom: 30px;
+}
+
+.testimonial-cards {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.testimonial-card {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  width: 30%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-card p {
+  font-style: italic;
+  color: #555;
+}
+
+.testimonial-card span {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+  color: #333;
+}
+.more-features-title{
+  background-color: rgb(0, 0, 0);
+  color: white;
+  text-align: center;
+  font-size: 44px;
+  font-family: serif;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}

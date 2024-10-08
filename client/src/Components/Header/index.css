@@ -1,13 +1,9 @@
 .nav{
   background-image: radial-gradient(rgb(42, 77, 233),  #382ef8);
-  background-color: #382ef8;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
-    padding-left: 24px;
-    padding-right: 24px;
-    align-items: center;
-    height: 70px;
-  }
+  } 
 
   /* Switch */
   .switch {
@@ -22,6 +18,55 @@
     opacity: 0;
     width: 0;
     height: 0;
+  }
+
+  .nav-items-container{
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    color: white;
+    width: 70vw;
+    position: relative;
+  }
+
+  .nav-cont-2{
+    background-color: orangered;
+    height: 40px;
+    width: 40%;
+    align-self: flex-end;
+    border-top-left-radius: 100px; /* Adjusted for a large quarter-circle effect */
+    border-bottom-right-radius: 50px; /* Added for a curved bottom-right corner */
+    transition: all 0.3s ease; /* Adds smoothness to any future interaction */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 5px;
+  }
+  .nav-container-1{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .social-nav-icon{
+    color: white;
+    font-size: 20px;
+  }
+
+  .nav-row-item{
+    font-size: 24px;
+  }
+  .nav-signup-button{
+    background-color: white;
+    width: 100px;
+    height: 30px;
+    color: black;
+    border: none;
+    border-radius: 2px;
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: bold;
   }
   
   .slider {
@@ -95,12 +140,12 @@
     cursor: pointer;
   }
   .app-logo{
-    height: 6vh;
-    width: 9vw;
-    border-radius: 5px;
+    height: 80px;
+    width: 300px;
+    border-right: 20px solid white;
   }
   .home-notification-button{
-    color: white;
+    color: white; 
     text-decoration: none;
     font-size: 34px;
     font-family: roboto;
@@ -123,13 +168,13 @@
     position: fixed;
     top: 10;
     right: -30vw; /* Initially hide the sidebar on the right side */
-    transition: right 0.5s ease;
+    transition: right 0.5s ease;  
     border-radius: 10px; /* Apply transition effect to right property */
   }
   
-  .sidebar.open {
-    right: 0; /* Move sidebar to the right when open */
-  }
+  /* .sidebar.open {
+    right: 0; 
+  } */
   
   .navButton {
     position: absolute;
@@ -212,6 +257,9 @@
     list-style-type: none;
     margin-right: 10px;
   }
+  .feature-nav-icon{
+    display: none;
+  }
   @media only screen and (max-width: 1024px) {
 
   }
@@ -227,4 +275,51 @@
       transition: right 0.5s ease;
       border-radius: 10px; /* Apply transition effect to right property */
     }
+    .app-logo{
+      height: 70px;
+      width: 40vw;
+      border-right: 10px solid white;
+    }
+    .nav-cont-2{
+      height: 35px;
+    }
+    .social-nav-icon{
+      font-size: 16px;
+    }
+    .nav-items-container{
+      display: none;
+    }
+    .nav-cont-2{
+      width: 50vw;
+    }
+    .feature-nav-icon{
+      display: block;
+      font-size: 34px;
+      font-weight: bold;
+      color: white;
+      align-self: flex-end;
+      margin-right: 20px;
+    }
+    .nav-items-container-mbl {
+      display: block;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      position: fixed;
+      height: 300px;
+      width: 200px;
+      background-color: #2196F3;
+      top: 80px;
+      left: -250px; /* Hide off the left initially */
+      transition: left 0.5s ease; /* Smooth transition for sliding effect */
+      padding-left: 10px;
+      z-index: 1;
+    }
+    
+    /* When open, make it slide in */
+    .nav-items-container-mbl.open {
+      left: 0; /* Bring it into view */
+    }
   }
+
+  

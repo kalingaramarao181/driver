@@ -1,0 +1,15 @@
+.about-page {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+  }
+  
+  .about-page h1 {
+    text-align: center;
+  }
+  
+  .about-page ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
