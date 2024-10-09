@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import User from './Components/User';
 import Header from './Components/Header';
 import Login from './Components/Login';
 import MapContainer from './Components/Maps'; // Import your MapContainer component
@@ -10,6 +9,11 @@ import AboutUs from './Components/AboutUs';
 import Services from './Components/Services';
 import DriverHomePage from './Components/DriverHome';
 import Carousel from './Components/Carousel';
+import AdminSecure from './Components/AdminSecure';
+import CustomerLogin from './Components/CustomerLogin';
+import Driver from './Components/Driver';
+import Secure from './Components/Secure';
+import Customer from './Components/Customer';
 
 function App() {
   return (
@@ -20,12 +24,14 @@ function App() {
         <Route path='/login' exact component={Login} />
         <Route path='/maps' exact component={MapContainer} />
         <Route path='/upi' exact component={QrCodeGenerator} />
-        <Route path='/home' exact component={Home} />
+        {/* <Route path='/home' exact component={Home} /> */}
         <Route path='/about' exact component={AboutUs} />
         <Route path='/services' exact component={Services} />
         <Route path='/driver-home' exact component={DriverHomePage} />
-        <Route path='/carousel' exact component={Carousel} />
-        <Route path='/admin' exact component={User} />
+        <Route path='/home' exact component={Carousel} />
+        <AdminSecure path='/driver' exact component={Driver} />
+        <Secure path='/customer' exact component={Customer} />
+        <Route path='/login-c' exact component={CustomerLogin} />
       </Switch>
     </BrowserRouter>  
   );

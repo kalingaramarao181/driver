@@ -83,8 +83,8 @@ h2 {
 }
 
 /* Button Styling */
-.prev-button,
-.next-button {
+.previous-btn,
+.nxt-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -124,18 +124,18 @@ h2 {
   background-color: #e24b2d;
 }
 
-.prev-button {
+.previous-btn {
   right: 20px;
   top: 45vh;
 }
 
-.next-button {
+.nxt-button {
   right: 20px;
   top: 36vh;
 }
 
-.prev-button:hover,
-.next-button:hover {
+.previous-btn:hover,
+.nxt-button:hover {
   background-color: orangered;
 }
 

@@ -9,10 +9,11 @@ import Cookies from "js-cookie"
 import { baseUrl } from "../config";
 import "./index.css";
 
-const Login = ({history}) => {
+const CustomerLogin = ({history}) => {
   const [isActive, setIsActive] = useState(false);
   const [isNext, setIsNext] = useState(false);
-  const [driverDetails, setDriverDetails] = useState({});
+  const [customerDetails, setCustomerDetails] = useState({});
+
   const [loginDetails, setLoginDetails] = useState({});
 
 
@@ -38,10 +39,10 @@ const Login = ({history}) => {
     }
   };
 
-  const handleSubmitDriverDetails = (e) => {
+  const handleSubmitCustomerDetails = (e) => {
     e.preventDefault();
     axios
-      .post(`${baseUrl}signup-driver`, driverDetails)
+      .post(`${baseUrl}signup-driver`, customerDetails)
       .then((res) => {
         alert("User Successfully created");
         window.history.replaceState({}, document.title, "/login");
@@ -72,8 +73,7 @@ const Login = ({history}) => {
       .then((res) => {
         Cookies.set("jwtToken", res.data.token, { expires: 30 });
         localStorage.setItem('senderData', JSON.stringify(res.data.user))
-        history.replace('/driver')
-        window.location.reload()
+        history.replace('/customer')
         
       })
       .catch((err) => {
@@ -83,9 +83,9 @@ const Login = ({history}) => {
       });
   }
 
-  const handleChangeDriverDetails = (event) => {
-    setDriverDetails({
-      ...driverDetails,
+  const handleChangeCustomerDetails = (event) => {
+    setCustomerDetails({
+      ...customerDetails,
       [event.target.name]: event.target.value,
     });
   };
@@ -112,41 +112,41 @@ const Login = ({history}) => {
         }}
       >
         <form
-          onSubmit={handleSubmitDriverDetails}
+          onSubmit={handleSubmitCustomerDetails}
           className="sn-form-container"
         >
           <h1 className="signup-heading">Personal Details</h1>
           <input
             name="emergencyNumber"
-            onChange={handleChangeDriverDetails}
+            onChange={handleChangeCustomerDetails}
             type="phone"
             placeholder="Emergency Number"
           />
-          <select onChange={handleChangeDriverDetails} name="maritalStatus">
+          <select onChange={handleChangeCustomerDetails} name="maritalStatus">
             <option value="maritalStatus">---Marital status---</option>
             <option value="Married">Married</option>
             <option value="Single">Single</option>
           </select>
-          <select onChange={handleChangeDriverDetails} name="gender">
+          <select onChange={handleChangeCustomerDetails} name="gender">
             <option value="Gender">---Select Gender---</option>
             <option value="Male">Male</option>
             <option value="Female">Female</option>
             <option value="Other">Other</option>
           </select>
           <input
-            onChange={handleChangeDriverDetails}
+            onChange={handleChangeCustomerDetails}
             name="dob"
             type="date"
             placeholder="Date of Birth"
           />
           <input
-            onChange={handleChangeDriverDetails}
+            onChange={handleChangeCustomerDetails}
             name="location"
             type="text"
             placeholder="Location"
           />
           <textarea
-            onChange={handleChangeDriverDetails}
+            onChange={handleChangeCustomerDetails}
             name="address"
             type="text"
             rows={4}
@@ -216,31 +216,31 @@ const Login = ({history}) => {
           </div>
           <span>or use your email for registration</span>
           <input
-            onChange={handleChangeDriverDetails}
+            onChange={handleChangeCustomerDetails}
             name="firstName"
             type="text"
             placeholder="First Name"
           />
           <input
-            onChange={handleChangeDriverDetails}
+            onChange={handleChangeCustomerDetails}
             name="lastName"
             type="text"
             placeholder="Last Name"
           />
           <input
-            onChange={handleChangeDriverDetails}
+            onChange={handleChangeCustomerDetails}
             name="phoneNumber"
             type="phone"
             placeholder="Phone Number"
           />
           <input
-            onChange={handleChangeDriverDetails}
+            onChange={handleChangeCustomerDetails}
             name="email"
             type="email"
             placeholder="Email"
           />
           <input
-            onChange={handleChangeDriverDetails}
+            onChange={handleChangeCustomerDetails}
             name="password"
             type="password"
             placeholder="Password"
@@ -372,4 +372,4 @@ const Login = ({history}) => {
     </div>
   );
 };
-export default Login;
+export default CustomerLogin;

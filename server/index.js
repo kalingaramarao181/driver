@@ -18,6 +18,8 @@ const otpRoutes = require('./Modules/sendOTP');
 const roomChatRoutes = require('./Modules/roomChat');
 const payments = require('./Modules/payments');
 const trips = require('./Modules/trip');
+const maps = require('./Modules/maps');
+
 
 
 
@@ -30,6 +32,8 @@ app.use('/api', otpRoutes);
 app.use('/api', roomChatRoutes);
 app.use('/api', payments);
 app.use('/api', trips);
+app.use('/api', maps);
+
 
 
 

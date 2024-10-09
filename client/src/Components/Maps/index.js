@@ -18,12 +18,12 @@ const center = {
   lng: 83.2185,
 };
 
-const MapContainer = () => {
+const Maps = () => {
 
   const {mapLocation} = useContext(UserContext)
   const { isLoaded, loadError } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyAPRWC8FDqOSK5tQIoHHwD-aFHTxFqQXCA", // Replace with your API key
+    googleMapsApiKey: "AIzaSyDpQYynPI5mi2WKRjpElTO5epXqPcvATBk", // Replace with your API key
   });
 
   const [map, setMap] = useState(null);
@@ -105,7 +105,7 @@ const MapContainer = () => {
   // Navigate to picked location in Google Maps
   const navigateToPickedLocation = () => {
     // const url = `https://www.google.com/maps?q=${currentLocation.lat},${currentLocation.lng}`
-    const url = `https://www.google.com/maps/@${markerPosition.lat},${markerPosition.lng},15z`; // Adjust the zoom level
+    const url = `https://www.google.com/maps?q=${markerPosition.lat},${markerPosition.lng}`; // Adjust the zoom level
     window.open(url, "_blank"); // Open in a new tab
   };
 
@@ -157,4 +157,4 @@ const MapContainer = () => {
   );
 };
 
-export default React.memo(MapContainer);
+export default React.memo(Maps);

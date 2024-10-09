@@ -13,7 +13,7 @@ const genarateUniqueId = () => {
 
 //GET ALL USERS
 router.get('/users', (req, res) => {
-    const sql = 'SELECT * FROM userdata';
+    const sql = 'SELECT * FROM userdata';   
     db.query(sql, (err, data) => {
         if (err) {
             console.error('Error fetching users:', err);
@@ -130,39 +130,88 @@ router.get('/users/:senderid', (req, res) => {
 });
 
 
-//CREATE NEW USER
-router.post('/signup-driver', async (req, res) => {
-    const { firstName, lastName, phoneNumber, email, password, emergencyNumber, maritalStatus, dob, location, address, photo, licenceNumber, licence, drivingExperince } = req.body;
-    const hashedPassword = await bcrypt.hash(password, 10);
-    console.log(firstName);
-    
-    // Check if user already exists
-    const checkUserSql = 'SELECT * FROM drivers WHERE email = ? OR phone_number = ?';
-    db.query(checkUserSql, [email, phoneNumber], (err, data) => {
-        if (err) {
-            console.error('Error checking user existence:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-        } else if (data.length > 0) {
-            res.status(400).json({ error: 'User already exists with this email or phone number' });
-        } else {
-            // Hash the password
+// Function to check if a user exists
+const checkUserExists = (email, phoneNumber) => {
+    return new Promise((resolve, reject) => {
+        const checkUserSql = 'SELECT * FROM drivers WHERE email = ? OR phone_number = ?';
+        db.query(checkUserSql, [email, phoneNumber], (err, data) => {
             if (err) {
-                console.error('Error hashing password:', err);
-                res.status(500).json({ error: 'Internal Server Error' });
-            } else {
-                // Insert new user
-                const sql = 'INSERT INTO drivers (first_name, last_name, phone_number, email, password, emergency_number, marital_status, dob, location, address, photo, licence_number, licence, driving_experince) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-                db.query(sql, [firstName, lastName, phoneNumber, email, hashedPassword, emergencyNumber, maritalStatus, dob, location, address, photo, licenceNumber, licence, drivingExperince], (err, result) => {
-                    if (err) {
-                        console.error('Error creating user:', err);
-                        res.status(500).json({ error: 'Internal Server Error' });
-                    } else {
-                        res.status(201).json({ id: result.insertId, firstName, email });
-                    }
-                });
+                return reject(err);
             }
-        }
+            resolve(data);
+        });
     });
+};
+
+// Function to insert a new user
+const insertUser = (userData) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'INSERT INTO drivers (first_name, last_name, phone_number, email, password, emergency_number, marital_status, dob, location, address, photo, licence_number, licence, driving_experince, isDriver) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        db.query(sql, userData, (err, result) => {
+            if (err) {
+                return reject(err);
+            }
+            resolve(result);
+        });
+    });
+}
+
+// CREATE NEW DRIVER
+router.post('/signup-driver', async (req, res) => {
+    try {
+        const { firstName, lastName, phoneNumber, email, password, emergencyNumber, maritalStatus, dob, location, address, photo, licenceNumber, licence, drivingExperince } = req.body;
+
+        if (!password) {
+            return res.status(400).json({ error: 'Password is required' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Check if user already exists
+        const existingUsers = await checkUserExists(email, phoneNumber);
+
+        if (existingUsers.length > 0) {
+            return res.status(400).json({ error: 'User already exists with this email or phone number' });
+        }
+
+        // Insert new user
+        const userData = [firstName, lastName, phoneNumber, email, hashedPassword, emergencyNumber, maritalStatus, dob, location, address, photo, licenceNumber, licence, drivingExperince, true];
+        const result = await insertUser(userData);
+
+        res.status(201).json({ id: result.insertId, firstName, email });
+    } catch (err) {
+        console.error('Error during signup-driver:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+// CREATE NEW CUSTOMER
+router.post('/signup-customer', async (req, res) => {
+    try {
+        const { firstName, lastName, phoneNumber, email, password, emergencyNumber, maritalStatus, dob, location, address, photo, licenceNumber, licence, drivingExperince } = req.body;
+
+        if (!password) {
+            return res.status(400).json({ error: 'Password is required' });
+        }
+
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Check if user already exists
+        const existingUsers = await checkUserExists(email, phoneNumber);
+
+        if (existingUsers.length > 0) {
+            return res.status(400).json({ error: 'User already exists with this email or phone number' });
+        }
+
+        // Insert new user
+        const userData = [firstName, lastName, phoneNumber, email, hashedPassword, emergencyNumber, maritalStatus, dob, location, address, photo, licenceNumber, licence, drivingExperince, false];
+        const result = await insertUser(userData);
+
+        res.status(201).json({ id: result.insertId, firstName, email });
+    } catch (err) {
+        console.error('Error during signup-customer:', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
 

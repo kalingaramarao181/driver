@@ -260,6 +260,13 @@
   .feature-nav-icon{
     display: none;
   }
+  .customer-signin-container{
+    position: fixed;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
   @media only screen and (max-width: 1024px) {
 
   }
