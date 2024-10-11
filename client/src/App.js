@@ -14,6 +14,7 @@ import CustomerLogin from './Components/CustomerLogin';
 import Driver from './Components/Driver';
 import Secure from './Components/Secure';
 import Customer from './Components/Customer';
+import SelectLocationDetails from './Components/SelectLocationDetails';
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
         <AdminSecure path='/driver' exact component={Driver} />
         <Secure path='/customer' exact component={Customer} />
         <Route path='/login-c' exact component={CustomerLogin} />
+        <Route path='/n' exact component={SelectLocationDetails} />
+
       </Switch>
     </BrowserRouter>  
   );

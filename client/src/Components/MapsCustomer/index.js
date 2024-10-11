@@ -6,6 +6,7 @@ import { FiNavigation } from "react-icons/fi";
 import { UserContext } from "../Context/userContext";
 import "./index.css";
 import { baseUrl } from "../config";
+import SelectLocationDetails from "../SelectLocationDetails";
 
 // Style for the map container
 const containerStyle = {
@@ -26,6 +27,8 @@ const MapsCustomer = () => {
     googleMapsApiKey: "AIzaSyDpQYynPI5mi2WKRjpElTO5epXqPcvATBk", // Replace with your API key
   });
 
+  const [openExtraDetails, setOpenExtraDetails] = useState(false)
+
   const [map, setMap] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(center);
   const [fromLocation, setFromLocation] = useState(null);
@@ -34,11 +37,9 @@ const MapsCustomer = () => {
   const [toAddress, setToAddress] = useState(""); // State for "To" address
   const [isFromLocationSelected, setIsFromLocationSelected] = useState(true);
   const [currentMarker, setCurrentMarker] = useState(null);
+  const [distanceDuration, setDistanceDuration] = useState(null);
+  const [locationDetails, setLocationDetails] = useState({})
 
-
-  useEffect(() => {
-
-  }, [])
 
   const onLoad = useCallback((map) => {
     const bounds = new window.google.maps.LatLngBounds();
@@ -67,9 +68,62 @@ const MapsCustomer = () => {
     }
   };
 
+  // Haversine formula to calculate straight-line distance
+  function haversineDistance(lat1, lng1, lat2, lng2) {
+    const R = 6371; // Radius of the Earth in kilometers
+    const dLat = toRad(lat2 - lat1);
+    const dLng = toRad(lng2 - lng1);
 
-  
-  
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRad(lat1)) *
+        Math.cos(toRad(lat2)) *
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    const distance = R * c; // Distance in kilometers
+    return distance;
+  }
+
+  function estimateDuration(distance, speed) {
+    const timeInHours = distance / speed; // Time = Distance / Speed
+    console.log(distance, speed);
+
+    const hours = Math.floor(timeInHours);
+    const minutes = Math.floor((timeInHours - hours) * 60);
+
+    if (hours === 0) {
+      return `${minutes}Minutes`;
+    } else {
+      return `${hours}Hours, ${minutes}Minutes`;
+    }
+  }
+
+  function toRad(value) {
+    return (value * Math.PI) / 180;
+  }
+
+  const calculateDistance = () => {
+    if (fromLocation && toLocation) {
+      const dist = haversineDistance(
+        fromLocation.lat,
+        fromLocation.lng,
+        toLocation.lat,
+        toLocation.lng
+      );
+      const averageSpeed = 20;
+      const duration = estimateDuration(dist, averageSpeed);
+      const distance = dist.toFixed(2) + "KM";
+      const amount = (dist * 50).toFixed(0);
+      setOpenExtraDetails((prev) => !prev)
+      setDistanceDuration({ distance, duration, amount });
+      setLocationDetails({...locationDetails, tripDistance: distance, amount, fromLocation, toLocation, duration})
+    } else {
+      alert("Both locations must be selected!");
+    }
+  };
 
   // Function to reverse geocode and get address from lat/lng
   const getAddressFromLatLng = (lat, lng, setAddress) => {
@@ -78,6 +132,7 @@ const MapsCustomer = () => {
     geocoder.geocode({ location: latLng }, (results, status) => {
       if (status === "OK" && results[0]) {
         setAddress(results[0].formatted_address); // Set the address state
+        console.log("Address: ", results[0].formatted_address);
       } else {
         console.error("Geocoder failed due to: " + status);
       }
@@ -106,6 +161,7 @@ const MapsCustomer = () => {
       ); // Get address for To location
     }
   };
+
 
   // Copy picked location (either "From" or "To") to clipboard
   const copyLocation = (location) => {
@@ -143,15 +199,12 @@ const MapsCustomer = () => {
     window.open(url, "_blank"); // Open in a new tab
   };
 
-  
-
-  if (loadError) return <div>Error loading maps</div>; // Error handling
+  if (loadError) return <div>Error loading maps</div>;
 
   return isLoaded ? (
     <div className="maps-main-container">
       <div className="maps-button-container-1">
         <div className="maps-buttons">
-          {/* Input fields for From and To Locations */}
           <button
             className="maps-button"
             style={{ backgroundColor: isFromLocationSelected && "blue" }}
@@ -176,21 +229,8 @@ const MapsCustomer = () => {
           >
             <FaCopy style={{ marginRight: "10px" }} /> Copy Location
           </button>
-          {/* <button
-            className="maps-button"
-            onClick={() =>
-              navigateToLocation(
-                isFromLocationSelected ? fromLocation : toLocation
-              )
-            }
-          >
-            Navigate <FiNavigation style={{ marginLeft: "10px" }} />
-          </button> */}
-          <button
-            className="maps-button"
-            onClick={navigateToDirections}
-          >
-           Show Directions <FiNavigation style={{ marginLeft: "10px" }} />
+          <button className="maps-button" onClick={navigateToDirections}>
+            Show Directions <FiNavigation style={{ marginLeft: "10px" }} />
           </button>
         </div>
       </div>
@@ -244,9 +284,10 @@ const MapsCustomer = () => {
         <button className="maps-button">
           <FaCopy />
         </button>
-        <button className="maps-button">
-          <FiNavigation />
+        <button onClick={calculateDistance} className="maps-button">
+          Next
         </button>
+        <SelectLocationDetails setOpenExtraDetails={setOpenExtraDetails} openExtraDetails={openExtraDetails} setLocationDetails={setLocationDetails} locationDetails={locationDetails}/>
       </div>
     </div>
   ) : (
