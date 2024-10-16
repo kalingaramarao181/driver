@@ -14,7 +14,6 @@ import { MdOutlinePayments } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 
 import { withRouter } from "react-router-dom/cjs/react-router-dom.min";
-import FindingTrips from "../FindingTrips";
 import Wallet from "../Wallet";
 import Payments from "../Payments";
 import Settings from "../Settings";
@@ -24,6 +23,7 @@ import QrCodeGenerator from "../UpiPayments";
 
 import { UserContext } from "../Context/userContext";
 import MapsCustomer from "../MapsCustomer";
+import MyBookings from "../MyBookings";
 
 const Customer = (props) => {
   const [sidebarButtonStatus, setSidebarButtonStatus] = useState("Duty");
@@ -34,8 +34,8 @@ const Customer = (props) => {
   const renderContent = () => {
     if (sidebarButtonStatus === "Duty") {
       return <MapsCustomer />;
-    } else if (sidebarButtonStatus === "FindingTrips") {
-      return <FindingTrips />;
+    } else if (sidebarButtonStatus === "MyBookings") {
+      return <MyBookings />;
     } else if (sidebarButtonStatus === "Wallet") {
       return <Wallet />;
     } else if (sidebarButtonStatus === "Payments") {
@@ -70,16 +70,16 @@ const Customer = (props) => {
             >
               <PiSteeringWheelDuotone className="sidebar-icon" /> Book A Driver
             </button>
-            {/* <button
+            <button
               style={{
                 backgroundColor:
-                  sidebarButtonStatus === "FindingTrips" && "#3a31eb",
+                  sidebarButtonStatus === "MyBookings" && "#3a31eb",
               }}
-              onClick={() => setSidebarButtonStatus("FindingTrips")}
+              onClick={() => setSidebarButtonStatus("MyBookings")}
               className="admin-sidebar-button"
             >
-              <FaSearch className="sidebar-icon" /> Finding Trips
-            </button> */}
+              <FaSearch className="sidebar-icon" /> My Bookings
+            </button>
             <button
               style={{
                 backgroundColor:
@@ -126,13 +126,13 @@ const Customer = (props) => {
             >
               <PiSteeringWheelDuotone />
             </button>
-            {/* <button
-              style={{fontWeight: sidebarButtonStatus === "FindingTrips" && "bold", transform: sidebarButtonStatus === "FindingTrips" && "scale(1.5)"}}
-              onClick={() => setSidebarButtonStatus("FindingTrips")}
+            <button
+              style={{fontWeight: sidebarButtonStatus === "MyBookings" && "bold", transform: sidebarButtonStatus === "MyBookings" && "scale(1.5)"}}
+              onClick={() => setSidebarButtonStatus("MyBookings")}
               className="admin-footer-button"
             >
                 <FaSearch />
-            </button> */}
+            </button>
             <button
              style={{fontWeight: sidebarButtonStatus === "Wallet" && "bold", transform: sidebarButtonStatus === "Wallet" && "scale(1.5)"}}
               onClick={() => setSidebarButtonStatus("Wallet")}

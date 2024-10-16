@@ -13,7 +13,7 @@ const genarateUniqueId = () => {
 
 //GET ALL USERS
 router.get('/trips', (req, res) => {
-    const sql = 'SELECT * FROM trip_data';
+    const sql = 'SELECT * FROM trip_data'; 
     db.query(sql, (err, data) => {
         if (err) {
             console.error('Error fetching users:', err);
@@ -26,35 +26,14 @@ router.get('/trips', (req, res) => {
     });
 });
 
-router.post('/trip-data', async (req, res) => {
-    const { customerId,location,amount,carName,fromLocation,toLocation,tripDistance, bookingType, duration } = req.body;
-    const bookingId = "123456"
-    const dateTime = new Date()
-    const baseFare = "190"
-    const fareAmount = "600"
-    const formateToLocation = JSON.stringify(toLocation)
-    const formateFromLocation = JSON.stringify(fromLocation)
-
-    const carImage = "https://imgd.aeplcdn.com/370x208/n/cw/ec/141867/nexon-exterior-right-front-three-quarter-71.jpeg?isig=0&q=80"
-    const sql = 'INSERT INTO trip_data (customerId, location, bookingId, carImage, bookingType, carType, duration, dateTime, tripDistance, baseFare, fareAmount, amount, fromLocation, toLocation) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    db.query(sql, [customerId, location, bookingId, carImage, bookingType, carName, duration, dateTime, tripDistance, baseFare, fareAmount, amount, formateFromLocation, formateToLocation], (err, result) => {
-        if (err) {
-            console.error('Error updating Trip:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-        } else {
-            res.json({ message: 'Trip updated successfully' });
-        }
-    });
-});
-
 
 
 
 // UPDATE EXISTING USER
-router.put('/trip/:id', async (req, res) => {
-    const { id } = req.params;
-    const sql = 'UPDATE trip_data SET isTripAccepted = TRUE WHERE id = ?';
-    db.query(sql, [id], (err, result) => {
+router.put('/trip/:id/:userId', async (req, res) => {
+    const { id, userId } = req.params;
+    const sql = 'UPDATE trip_data SET isTripAccepted = TRUE, driverId = ? WHERE id = ?';
+    db.query(sql, [userId, id], (err, result) => {
         if (err) {
             console.error('Error updating Trip:', err);
             res.status(500).json({ error: 'Internal Server Error' });

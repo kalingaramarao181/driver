@@ -6,10 +6,11 @@ const SelectLocationDetails = ({setOpenExtraDetails,openExtraDetails,setLocation
     const customerId = localStorage.getItem("senderData") && JSON.parse(localStorage.getItem("senderData")).id
    const submithandler = (e) => {
     e.preventDefault()
-    axios.post(`${baseUrl}trip-data`, locationDetails)
+    axios.post(`${baseUrl}book-driver`, locationDetails)
     .then((res) => {
         alert("Location Selected successfully Wait for Driver")
         console.log("Successfully Added");
+        window.location.reload()
     })
     .catch((err) => {
         console.log(err);

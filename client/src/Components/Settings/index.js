@@ -31,7 +31,7 @@ const Settings = () => {
             featureName: "Payments",
             featureIcon: MdOutlinePayments
         },{
-            featureId: "Payments",
+            featureId: "DriverProfile",
             featureName: "Security",
             featureIcon: MdOutlineSecurity
         },{

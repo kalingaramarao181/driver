@@ -1,0 +1,45 @@
+.blur-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3); /* Optional dark overlay */
+    backdrop-filter: blur(5px); /* Adjust the blur value as per need */
+    z-index: 998; /* Make sure it's below the popup */
+}
+.document-card{
+    width: 93%;
+    height: 100%;
+    border: 1px solid blue;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    cursor: pointer;
+}
+.document-demo-image{
+    width: 60%;
+    margin-bottom: 10px;
+}
+.document-upload-button{
+    width: 20%;
+    background-color: transparent;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(170, 167, 167);
+}
+.document-upload-icon{
+    margin-right: 6px;
+    font-size: 18px;
+}
+.document-upload-file-input{
+    display: none;
+}

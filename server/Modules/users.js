@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt'); // Import bcrypt
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 const path = require('path');
+const upload = require('../Config/multer'); // Import multer middleware
 
 
 const genarateUniqueId = () => {
@@ -12,14 +13,15 @@ const genarateUniqueId = () => {
 }
 
 //GET ALL USERS
-router.get('/users', (req, res) => {
-    const sql = 'SELECT * FROM userdata';   
-    db.query(sql, (err, data) => {
+router.get('/user-data/:userId', (req, res) => {
+    const {userId} = req.params
+    const sql = 'SELECT * FROM drivers WHERE id = ?';   
+    db.query(sql, [userId], (err, data) => {
         if (err) {
             console.error('Error fetching users:', err);
             res.status(500).json({ error: 'Internal Server Error' });
         } else {
-            res.json(data);
+            res.json(data[0]);
         }
     });
 });
@@ -217,19 +219,30 @@ router.post('/signup-customer', async (req, res) => {
 
 
 // UPDATE EXISTING USER
-router.put('/users/:id', async (req, res) => {
-    const { id } = req.params;
-    const { fullname, email, password, phoneno, dateofbirth, address } = req.body; // Example fields
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const sql = 'UPDATE userdata SET fullname = ?, email = ?, password = ?, phoneno = ?, dateofbirth = ?, address = ? WHERE id = ?';
-    db.query(sql, [fullname, email, hashedPassword, phoneno, dateofbirth, address, id], (err, result) => {
+router.put('/upload-file/:userId', upload.single('file') ,(req, res) => {
+    const { userId } = req.params;
+    const file = req.file; 
+    
+    const documentType = req.body.documentType
+    if (!documentType) {
+        return res.status(400).send('Document type is required.');
+      }
+
+    const query = `UPDATE drivers SET ${documentType} = ? WHERE id = ?`;
+
+    const values = [
+        file ? file.path : null,
+        userId
+    ];
+
+    db.query(query, values, (err, result) => {
         if (err) {
-            console.error('Error updating user:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
-        } else {
-            res.json({ message: 'User updated successfully' });
+            console.error('Error inserting message:', err);
+            return res.status(500).send('Internal server error');
         }
+        res.status(200).send('Message sent');
     });
+    
 });
 
 

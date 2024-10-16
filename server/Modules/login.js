@@ -21,6 +21,7 @@ router.post('/login', (req, res) => {
         }
 
         const user = data[0];
+
         const isPasswordMatched = await bcrypt.compare(password, user.password);
 
         if (!isPasswordMatched) {
@@ -30,7 +31,7 @@ router.post('/login', (req, res) => {
          const token = jwt.sign(
             { id: user.id, username: user.email, isDriver: user.isDriver },
             JWT_SECRET,
-           { expiresIn: '1h' } // Token expires in 1 hour
+           { expiresIn: '5h' } // Token expires in 1 hour
         );
 
         return res.json({ message: 'Login successful', user, token });

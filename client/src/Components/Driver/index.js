@@ -25,9 +25,10 @@ import QrCodeGenerator from "../UpiPayments";
 
 import { UserContext } from "../Context/userContext";
 import Maps from "../Maps";
+import DriverProfile from "../DriverProfile";
 
 const Driver = (props) => {
-  const [sidebarButtonStatus, setSidebarButtonStatus] = useState("Duty");
+  const [sidebarButtonStatus, setSidebarButtonStatus] = useState("DriverProfile");
   const [mapLocation, setMapLocation] = useState({lat:17.72834676147881,lng:83.30856055625414});
 
   const { isTablet, isDesktop } = useDeviceType();
@@ -47,9 +48,10 @@ const Driver = (props) => {
       return <Feedback />;
     }else if (sidebarButtonStatus === "Upi") {
       return <QrCodeGenerator />;
-    }
-    else if (sidebarButtonStatus === "Maps") {
+    }else if (sidebarButtonStatus === "Maps") {
       return <Maps />;
+    }else if (sidebarButtonStatus === "DriverProfile") {
+      return <DriverProfile />;
     }
   };
 
