@@ -204,7 +204,9 @@
 .driver-profile-doc-nav-container{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;padding: 5px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
     border-radius: 5px;
     background-color: #485c64;
     color: white;
@@ -218,6 +220,45 @@
     font-size: 10px;
     font-weight: bold;
     font-family: Monospace;
+}
+.driver-profile-name-status-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.driver-pending-status{
+    color: rgb(218, 156, 41);
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.pending-dot-icon{
+    font-size: 24px;
+}
+.verified-doc{
+    color: rgb(55, 223, 55);
+}
+.profile-dropdown{
+    width: 200px;
+    position: fixed;
+    border-radius: 10px;
+    background-color: white;
+    right: 15px;
+    padding: 16px;
+    border: 1px solid red;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.profile-dropdown-content{
+    font-size: 14px;
+    font-family: Georgia, serif;
+    color: rgb(146, 1, 1);
+    text-align: center;
+}
+.profile-dropdown-span{
+    font-weight: bold;
 }
 @media only screen and (max-width: 1024px) {
 

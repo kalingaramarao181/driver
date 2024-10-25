@@ -8,6 +8,8 @@ import Cookies from "js-cookie"
 import {jwtDecode} from 'jwt-decode';
 const Trip = ({ trip, isTripAccept}) => {
   const { isMobile, isTablet, isDesktop } = useDeviceType();
+  console.log(trip);
+  
   const token = Cookies.get("jwtToken");
     const decodedToken = jwtDecode(token);
 
@@ -26,9 +28,11 @@ const Trip = ({ trip, isTripAccept}) => {
     })
   }
 
-  const handleNavigate = (mapLocation) => {
+  const handleNavigate = (mapLocation, toLocation) => {
     setSidebarButtonStatus("Maps")
     setMapLocation(JSON.parse(mapLocation))
+    console.log(JSON.parse(mapLocation), JSON.parse(toLocation));
+    
   }
 
 
@@ -51,7 +55,7 @@ const Trip = ({ trip, isTripAccept}) => {
       {isTripAccept ? (
         <td className="table-data end-data">
           <button
-          onClick={() => handleNavigate(trip.fromLocation)}
+          onClick={() => handleNavigate(trip.fromLocation, trip.toLocation)}
           style={{backgroundColor: "rgb(33, 2, 105)"}}
             className={`${
               isTablet || isDesktop ? "action" : "action-mobile"

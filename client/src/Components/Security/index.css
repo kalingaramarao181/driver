@@ -1,0 +1,271 @@
+/* Style for the section */
+.security-banner-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Full viewport height */
+    background-color: rgb(6, 88, 143);
+    background-image: url("https://t4.ftcdn.net/jpg/03/58/10/87/360_F_358108785_rNJtmort9m65M3pft5swd7lnKJcTCB8u.jpg");
+    background-size: cover;
+    animation: fade-in-out 1s ease-in-out;
+    padding: 10px;
+}
+
+/* Centering the content inside the container */
+.security-container {
+    text-align: center;
+}
+
+/* Title and paragraph styling */
+.banner-heading1 {
+    font-size: 4em;
+    color: #f7f2f2;
+    margin-bottom: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: left;
+}
+
+.mb {
+    font-size: 1.5em;
+    color: #faf8f8;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: left;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Optional animations for the row */
+.animate-slide {
+    animation: slideInLeft 1s ease-in-out;
+}
+
+/* Cards Section */
+.service-container {
+    background-color: #5da2ec;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    margin: 15px 30px;
+}
+
+.service-box {
+    background-color: #22578f;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: left;
+    min-height: 360px; /* Set a minimum height to ensure all cards are the same */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    animation: slideInLeft 1s ease-in-out;
+}
+
+.service-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.service-img {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.service-heading4 {
+    font-size: 30px;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.service-para {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #faf8f8;
+    margin-bottom: 15px;
+}
+
+.service-list {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.service-list-item {
+    color: #f5f3f3;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.service-link {
+    color: #2da3f7;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.service-link:hover {
+    color: #fdfbfb;
+}
+
+.service-item {
+    justify-content: space-between;
+}
+
+.col-lg-4, .col-md-4, .col-12 {
+    flex: 1 1 30%;
+    margin-bottom: 30px;
+}
+
+/* Page-3 */
+.service-section {
+    background-color: #0c134a;
+    padding: 50px 0;
+    color: #fff;
+    text-align: center;
+}
+
+.service-section1 {
+    margin: 0px 350px 0px 350px;
+}
+
+.service-title-small {
+    font-size: 18px;
+    color: #3aa9ff;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.service-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+/* Service Tabs */
+.service-tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 50px;
+}
+
+.service-tab {
+    padding: 20px;
+    border-radius: 10px;
+    width: 200px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.service-tab:hover {
+    background-color: #05d8ff;
+}
+
+.service-tab img {
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+.service-tab span {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Service Content */
+.service-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.service-content h3 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.service-content p {
+    font-size: 16px;
+    color: #d0d7e2;
+    margin-bottom: 15px;
+}
+
+.service-content img {
+    width: 100%;
+    border-radius: 15px;
+}
+
+.service-content-right {
+    max-width: 40%;
+}
+
+.service-content-left {
+    max-width: 55%;
+}
+
+/* Contact Form */
+.form-main-con {
+    background-color: #05d8ff;
+}
+
+/* Footer Styles */
+footer {
+    text-align: center;
+    margin-top: 3px;
+    padding: 20px;
+    background-color: #0066cc;
+    color: #fff;
+    border-radius: 0 0 10px 10px;
+}
+
+footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Card Hover Effect */
+.service-box:hover .service-title h4 {
+    color: #c29128;
+}
+
+svg:hover {
+    fill: #c29128; 
+}
+.col-lg-12{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 90vw;
+}
+.security-image{
+    width: 40%;
+    height: 70%;
+    border-radius: 10px;
+}
+
+/* Slide-in Animation */
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}

@@ -1,0 +1,42 @@
+.acctions-button{
+    padding-left: 16px;
+    padding-right: 16px;
+    padding: 5px;
+    border: none;
+    margin-right: 5px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    background-color: rgb(5, 99, 12);
+    color: white;
+    margin-bottom: 5px;
+    width: 90px;
+    height: 30px;
+
+}
+.notification-message{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px;
+    margin-top: 5px;
+}
+.notification-card-section{
+    display: flex;
+    align-items: center;
+}
+.notification-dot{
+    margin-right: 10px;
+    color: rgb(2, 2, 54);
+    font-size: 20px;
+}
+.notifications-button-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+@media only screen and (max-width: 480px) {
+    .notifications-button-container{
+        flex-direction: column;
+    }
+}

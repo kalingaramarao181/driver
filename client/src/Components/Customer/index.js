@@ -169,6 +169,7 @@ const Customer = (props) => {
       </div>
       {(isTablet || isDesktop) && <div className="page-footer">
         <p className="contact-us">Contact Us</p>
+        <p className="contact-us">© {new Date().getFullYear()} All rights reserved to <a target="_blank" href="https://beedatatech.com">BeedataTech.com</a></p>
         <div>
           <SlSocialFacebook className="social-icon" />
           <SlSocialInstagram className="social-icon" />

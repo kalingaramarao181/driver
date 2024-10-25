@@ -60,9 +60,9 @@ const Header = (props) => {
           <IoReorderThree onClick={toggleSidebar} className="feature-nav-icon" />
           <ul className={`nav-items-container nav-items-container-mbl ${isOpen ? 'open' : ''}`}>
             <Link style={{color: "white", textDecoration: "none"}} to="home"><li className="nav-row-item">Home</li></Link>
-            <li className="nav-row-item">About Us</li>
+            <li className="nav-row-item"><a  style={{color: "white", textDecoration: "none"}} href="#aboutSection">About Us</a></li>
             <li className="nav-row-item">Service</li>
-            <li className="nav-row-item">Security</li>
+            <Link style={{color: "white", textDecoration: "none"}} to="security"><li className="nav-row-item">Security</li></Link>
             {/* Conditional rendering based on token expiration */}
             {isExpired ? (
               <div>

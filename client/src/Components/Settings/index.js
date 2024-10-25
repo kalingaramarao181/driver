@@ -35,11 +35,11 @@ const Settings = () => {
             featureName: "Security",
             featureIcon: MdOutlineSecurity
         },{
-            featureId: "Payments",
+            featureId: "Notifications",
             featureName: "Notification",
             featureIcon: IoIosNotificationsOutline
         },{
-            featureId: "Payments",
+            featureId: "UserDataAdmin",
             featureName: "Support",
             featureIcon: MdOutlineContactSupport
         },{

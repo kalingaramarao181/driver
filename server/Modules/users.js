@@ -6,11 +6,26 @@ const { v4: uuidv4 } = require('uuid');
 const fs = require('fs');
 const path = require('path');
 const upload = require('../Config/multer'); // Import multer middleware
+const { log } = require('console');
 
 
 const genarateUniqueId = () => {
     return uuidv4()
 }
+
+
+router.get('/driver-data', (req, res) => {
+    const sql = 'SELECT * FROM drivers WHERE isDriver = 1';   
+    db.query(sql, (err, data) => {
+        if (err) {
+            console.error('Error fetching users:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        } else {
+            res.json(data);
+        }
+    });
+});
+
 
 //GET ALL USERS
 router.get('/user-data/:userId', (req, res) => {
@@ -26,31 +41,20 @@ router.get('/user-data/:userId', (req, res) => {
     });
 });
 
-router.get('/room-users/:userIds', (req, res) => {
-    const { userIds } = req.params;
-
-    // Split the comma-separated userIds and convert them to integers
-    const ids = userIds.split(',').map(id => parseInt(id, 10));
-
-    // Check for invalid IDs
-    if (ids.some(isNaN)) {
-        return res.status(400).send('Invalid IDs');
-    }
-
-    // Generate placeholders for the SQL query
-    const placeholders = ids.map(() => '?').join(',');
-
-    // SQL query to select users by ID
-    const query = `SELECT * FROM userdata WHERE id IN (${placeholders})`;
-
-    db.query(query, ids, (err, result) => {
+//GET USER VERIFICATION DATA
+router.get('/document-verification-data/:userId', (req, res) => {
+    const {userId} = req.params
+    const sql = 'SELECT * FROM document_verification WHERE id = ?';   
+    db.query(sql, [userId], (err, data) => {
         if (err) {
-            console.error('Error Fetching users:', err);
-            return res.status(500).send('Internal server error');
+            console.error('Error fetching users:', err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        } else {
+            res.json(data[0]);
         }
-        res.status(200).send(result);
     });
 });
+
 
 
 //GET A SINGLE USER BY ID
@@ -187,6 +191,131 @@ router.post('/signup-driver', async (req, res) => {
     }
 });
 
+
+router.put('/document-verification/:userId', (req, res) => {
+    const { userId } = req.params;
+    const {
+      photo_verify,
+      pan_verify,
+      driving_verify,
+      adhar_verify,
+      certificate_verify,
+      photo_review,
+      driving_review,
+      adhar_review,
+      pan_review,
+      certificate_review
+    } = req.body;
+  
+    const checkQuery = `SELECT * FROM document_verification WHERE user_id = ?`;
+  
+    db.query(checkQuery, [userId], (err, result) => {
+      if (err) {
+        return res.status(500).send('Error checking for existing record');
+      }
+  
+      if (result.length > 0) {
+        // Record exists, dynamically build the update query based on provided fields
+        let updateFields = [];
+        let updateValues = [];
+  
+        if (photo_verify !== undefined) {
+          updateFields.push('photo_verify = ?');
+          updateValues.push(photo_verify);
+        }
+        if (pan_verify !== undefined) {
+            updateFields.push('pan_verify = ?');
+            updateValues.push(pan_verify);
+          }
+        if (driving_verify !== undefined) {
+          updateFields.push('driving_verify = ?');
+          updateValues.push(driving_verify);
+        }
+        if (adhar_verify !== undefined) {
+          updateFields.push('adhar_verify = ?');
+          updateValues.push(adhar_verify);
+        }
+        if (certificate_verify !== undefined) {
+          updateFields.push('certificate_verify = ?');
+          updateValues.push(certificate_verify);
+        }
+        if (photo_review !== undefined) {
+          updateFields.push('photo_review = ?');
+          updateValues.push(photo_review);
+        }
+        if (pan_review !== undefined) {
+            updateFields.push('pan_review = ?');
+            updateValues.push(pan_review);
+          }
+        if (driving_review !== undefined) {
+          updateFields.push('driving_review = ?');
+          updateValues.push(driving_review);
+        }
+        if (adhar_review !== undefined) {
+          updateFields.push('adhar_review = ?');
+          updateValues.push(adhar_review);
+        }
+        if (certificate_review !== undefined) {
+          updateFields.push('certificate_review = ?');
+          updateValues.push(certificate_review);
+        }
+  
+        updateValues.push(userId); // Add userId as the last value
+  
+        const updateQuery = `
+          UPDATE document_verification 
+          SET ${updateFields.join(', ')}
+          WHERE user_id = ?
+        `;
+  
+        db.query(updateQuery, updateValues, (updateErr, updateResult) => {
+          if (updateErr) {
+            return res.status(500).send('Error updating the record');
+          }
+          res.status(200).send('Record updated successfully');
+        });
+      } else {
+        // No record exists, perform an insert
+        const insertQuery = `
+          INSERT INTO document_verification (
+            user_id, 
+            photo_verify, 
+            driving_verify, 
+            adhar_verify, 
+            certificate_verify, 
+            photo_review, 
+            driving_review, 
+            adhar_review, 
+            certificate_review,
+            pan_verify,
+            pan_review
+          ) 
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `;
+  
+        const insertValues = [
+          userId,
+          photo_verify || null,
+          driving_verify || null,
+          adhar_verify || null,
+          certificate_verify || null,
+          photo_review || null,
+          driving_review || null,
+          adhar_review || null,
+          certificate_review || null
+        ];
+  
+        db.query(insertQuery, insertValues, (insertErr, insertResult) => {
+          if (insertErr) {
+            return res.status(500).send('Error inserting the record');
+          }
+          res.status(200).send('Record inserted successfully');
+        });
+      }
+    });
+});
+
+
 // CREATE NEW CUSTOMER
 router.post('/signup-customer', async (req, res) => {
     try {
@@ -216,127 +345,128 @@ router.post('/signup-customer', async (req, res) => {
     }
 });
 
+// UPDATING AN EXISTING USER PASSWORD
+router.put('/update-user-data/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const {
+            first_name, last_name, phone_number, email, password, emergency_number,
+            marital_status, dob, location, address
+        } = req.body;
 
+        // Create an array to store the fields that need to be updated
+        let fieldsToUpdate = [];
+        let values = [];
 
-// UPDATE EXISTING USER
-router.put('/upload-file/:userId', upload.single('file') ,(req, res) => {
+        if (first_name) {
+            fieldsToUpdate.push('first_name = ?');
+            values.push(first_name);
+        }
+        if (last_name) {
+            fieldsToUpdate.push('last_name = ?');
+            values.push(last_name);
+        }
+        if (phone_number) {
+            fieldsToUpdate.push('phone_number = ?');
+            values.push(phone_number);
+        }
+        if (email) {
+            fieldsToUpdate.push('email = ?');
+            values.push(email);
+        }
+        if (password) {
+            const hashedPassword = await bcrypt.hash(password, 10);
+            fieldsToUpdate.push('password = ?');
+            values.push(hashedPassword);
+        }
+        if (emergency_number) {
+            fieldsToUpdate.push('emergency_number = ?');
+            values.push(emergency_number);
+        }
+        if (marital_status) {
+            fieldsToUpdate.push('marital_status = ?');
+            values.push(marital_status);
+        }
+        if (dob) {
+            fieldsToUpdate.push('dob = ?');
+            values.push(dob);
+        }
+        if (location) {
+            fieldsToUpdate.push('location = ?');
+            values.push(location);
+        }
+        if (address) {
+            fieldsToUpdate.push('address = ?');
+            values.push(address);
+        }
+
+        if (fieldsToUpdate.length === 0) {
+            return res.status(400).json({ error: 'No fields provided to update' });
+        }
+
+        const sql = `UPDATE drivers SET ${fieldsToUpdate.join(', ')} WHERE id = ?`;
+        values.push(userId);
+
+        db.query(sql, values, (err, result) => {
+            if (err) {
+                console.error('Error updating user:', err);
+                res.status(500).json({ error: 'Internal Server Error' });
+            } else {
+                res.json({ message: 'User data updated successfully' });
+            }
+        });
+    } catch (error) {
+        console.error('Error updating user data:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+router.put('/upload-file/:userId', upload.single('file'), (req, res) => {
     const { userId } = req.params;
-    const file = req.file; 
+    const file = req.file;
     
-    const documentType = req.body.documentType
+    const documentType = req.body.documentType;
+    
     if (!documentType) {
-        return res.status(400).send('Document type is required.');
+      return res.status(400).send('Document type is required.');
+    }
+
+    if (!file) {
+      return res.status(400).send('File upload is required.');
+    }
+  
+    const query = `UPDATE drivers SET ${documentType} = ? WHERE id = ?`;
+    const values = [file.path, userId];
+  
+    db.query(query, values, (err, result) => {
+      if (err) {
+        console.error('Error updating database:', err);
+        return res.status(500).send('Internal server error');
       }
 
-    const query = `UPDATE drivers SET ${documentType} = ? WHERE id = ?`;
-
-    const values = [
-        file ? file.path : null,
-        userId
-    ];
-
-    db.query(query, values, (err, result) => {
-        if (err) {
-            console.error('Error inserting message:', err);
-            return res.status(500).send('Internal server error');
-        }
-        res.status(200).send('Message sent');
+      res.status(200).send('File uploaded and path saved in database');
     });
-    
 });
 
 
+router.put('/accept-documents/:userId', async (req, res) => {
+    try {
+        const { userId } = req.params;
 
+        const sql = `UPDATE drivers SET document_verification = 1 WHERE id = ?`;
 
-
-router.delete('/users/:id', (req, res) => {
-    const { id } = req.params;
-
-    const getMessagesQuery = 'SELECT file FROM messages WHERE (senderid = ? OR receiverid = ?) AND file IS NOT NULL';
-    const deleteMessagesQuery = 'DELETE FROM messages WHERE senderid = ? OR receiverid = ?';
-    const deleteUserQuery = 'DELETE FROM userdata WHERE id = ?';
-
-    // Start a transaction
-    db.beginTransaction((err) => {
-        if (err) {
-            console.error('Error starting transaction:', err);
-            return res.status(500).json({ error: 'Internal Server Error' });
-        }
-
-        // First, get the filenames of the user's messages
-        db.query(getMessagesQuery, [id, id], (err, messages) => {
+        db.query(sql, [userId], (err, result) => {
             if (err) {
-                return db.rollback(() => {
-                    console.error('Error fetching user messages:', err);
-                    res.status(500).json({ error: 'Internal Server Error' });
-                });
+                console.error('Error updating user:', err);
+                res.status(500).json({ error: 'Internal Server Error' });
+            } else {
+                res.json({ message: 'User data updated successfully' });
             }
-
-            // Delete the files from the uploads directory
-            let filesDeleted = true;
-            const fileDeletions = messages.map((message) => {
-                if (message.file) {
-                    const filePath = path.join(__dirname, '..', message.file);
-
-                    return new Promise((resolve, reject) => {  
-                        fs.unlink(filePath, (err) => {
-                            if (err) {
-                                console.error('Error deleting file:', err);
-                                filesDeleted = false;
-                                reject(err);
-                            } else {
-                                console.log(`Deleted file: ${filePath}`);
-                                resolve();
-                            }
-                        });
-                    });
-                } else {
-                    return Promise.resolve(); // No file to delete
-                }
-            });
-
-            // Ensure all files are deleted before continuing
-            Promise.all(fileDeletions)
-                .then(() => {
-                    // Delete messages where the user is either the sender or receiver
-                    db.query(deleteMessagesQuery, [id, id], (err, result) => {
-                        if (err) {
-                            return db.rollback(() => {
-                                console.error('Error deleting user messages:', err);
-                                res.status(500).json({ error: 'Internal Server Error' });
-                            });
-                        }
-
-                        // Finally, delete the user from userdata
-                        db.query(deleteUserQuery, [id], (err, result) => {
-                            if (err) {
-                                return db.rollback(() => {
-                                    console.error('Error deleting user:', err);
-                                    res.status(500).json({ error: 'Internal Server Error' });
-                                });
-                            }
-
-                            // Commit the transaction if everything is successful
-                            db.commit((err) => {
-                                if (err) {
-                                    return db.rollback(() => {
-                                        console.error('Error committing transaction:', err);
-                                        res.status(500).json({ error: 'Internal Server Error' });
-                                    });
-                                }
-
-                                res.json({ message: 'User, their messages, and associated files deleted successfully' });
-                            });
-                        });
-                    });
-                })
-                .catch((err) => {
-                    db.rollback(() => {
-                        res.status(500).json({ error: 'Failed to delete one or more files' });
-                    });
-                });
         });
-    });
+    } catch (error) {
+        console.error('Error updating user data:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
 

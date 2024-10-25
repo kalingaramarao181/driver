@@ -164,7 +164,7 @@ const Carousel = () => {
           style={{ marginLeft: "20px", marginRight: "20px", border: "1px solid black" }}
           className="marque-features"
           behavior="scroll"
-          direction="left"
+          direction="right"
         >
           <div className="marque-features">
             <div className="card-1">
@@ -334,7 +334,7 @@ const Carousel = () => {
         </marquee>
       </div>
 
-      <div className="about-section">
+      <div id="aboutSection" className="about-section">
         <div className="about-header">
           <h2 className="about-title">About RideReady</h2>
           <p className="about-description">

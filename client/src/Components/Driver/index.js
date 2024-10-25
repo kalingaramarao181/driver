@@ -26,9 +26,11 @@ import QrCodeGenerator from "../UpiPayments";
 import { UserContext } from "../Context/userContext";
 import Maps from "../Maps";
 import DriverProfile from "../DriverProfile";
+import UserDataAdmin from "../UserDataAdmin";
+import Notifications from "../Notifications";
 
 const Driver = (props) => {
-  const [sidebarButtonStatus, setSidebarButtonStatus] = useState("DriverProfile");
+  const [sidebarButtonStatus, setSidebarButtonStatus] = useState("Notifications");
   const [mapLocation, setMapLocation] = useState({lat:17.72834676147881,lng:83.30856055625414});
 
   const { isTablet, isDesktop } = useDeviceType();
@@ -52,6 +54,10 @@ const Driver = (props) => {
       return <Maps />;
     }else if (sidebarButtonStatus === "DriverProfile") {
       return <DriverProfile />;
+    }else if (sidebarButtonStatus === "UserDataAdmin") {
+      return <UserDataAdmin />;
+    }else if (sidebarButtonStatus === "Notifications") {
+      return <Notifications />;
     }
   };
 
@@ -59,7 +65,7 @@ const Driver = (props) => {
     return (
       <div className="admin-sidebar">
         <div className="admin-buttons-container">
-          <button className="admin-image-botton" onClick={() => setSidebarButtonStatus("Admin")}>
+          <button className="admin-image-botton" onClick={() => setSidebarButtonStatus("DriverProfile")}>
             <img className="admin-image" alt="profile" src="https://www.payrollhub.in/static/images/admin.png"/>
           </button>
           <div>
@@ -172,11 +178,12 @@ const Driver = (props) => {
       </div>
       {(isTablet || isDesktop) && <div className="page-footer">
         <p className="contact-us">Contact Us</p>
+        <p className="contact-us">© {new Date().getFullYear()} All rights reserved to <a target="_blank" href="https://beedatatech.com">BeedataTech.com</a></p>
         <div>
-          <SlSocialFacebook className="social-icon" />
+          <a style={{color: "white"}} target="_blank" href="https://www.facebook.com/profile.php?id=61567807704128"><SlSocialFacebook className="social-icon" /></a>
           <SlSocialInstagram className="social-icon" />
-          <TiSocialTwitter className="social-icon" />
-          <TiSocialLinkedin className="social-icon" />
+          <a style={{color: "white"}} target="_blank" href="https://x.com/Rideready2024"><TiSocialTwitter className="social-icon" /></a>
+          <a style={{color: "white"}} target="_blank" href="https://www.linkedin.com/in/rideready-beedata-98bb91334/"><TiSocialLinkedin className="social-icon" /></a>
           <SlSocialGoogle className="social-icon" />
         </div>
       </div>}

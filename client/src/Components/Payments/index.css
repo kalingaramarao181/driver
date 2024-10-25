@@ -8,12 +8,10 @@
     border-radius: 10px;
 }
 
-/* 16 */
 .payments-cards-container::-webkit-scrollbar-track {
     background: #f1f1f1;
 }
 
-/* 16 */
 .payments-cards-container::-webkit-scrollbar {
     width: 3px;
 }
