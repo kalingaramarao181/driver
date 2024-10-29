@@ -29,7 +29,6 @@ const DriverProfile = () => {
       .get(`${baseUrl}user-data/${userId}`)
       .then((res) => {
         setUserData(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -41,6 +40,8 @@ const DriverProfile = () => {
       .get(`${baseUrl}document-verification-data/${userId}`)
       .then((res) => {
         setDocumentVerificationData(res.data);
+        console.log(res.data);
+        
       })
       .catch((err) => {
         console.log(err);

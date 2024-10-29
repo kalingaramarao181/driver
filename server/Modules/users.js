@@ -44,11 +44,12 @@ router.get('/user-data/:userId', (req, res) => {
 //GET USER VERIFICATION DATA
 router.get('/document-verification-data/:userId', (req, res) => {
     const {userId} = req.params
-    const sql = 'SELECT * FROM document_verification WHERE id = ?';   
+    console.log(userId);
+    const sql = 'SELECT * FROM document_verification WHERE user_id = ?';   
     db.query(sql, [userId], (err, data) => {
         if (err) {
             console.error('Error fetching users:', err);
-            res.status(500).json({ error: 'Internal Server Error' });
+            res.status(500).json({ error: 'Internal Server Error' });   
         } else {
             res.json(data[0]);
         }
@@ -152,7 +153,7 @@ const checkUserExists = (email, phoneNumber) => {
 // Function to insert a new user
 const insertUser = (userData) => {
     return new Promise((resolve, reject) => {
-        const sql = 'INSERT INTO drivers (first_name, last_name, phone_number, email, password, emergency_number, marital_status, dob, location, address, photo, licence_number, licence, driving_experince, isDriver) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+        const sql = 'INSERT INTO drivers (first_name, last_name , phone_number, email, password, emergency_number, marital_status, dob, location, address, photo, licence_number, driving_licence, driving_experince, isDriver) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
         db.query(sql, userData, (err, result) => {
             if (err) {
                 return reject(err);
@@ -277,43 +278,50 @@ router.put('/document-verification/:userId', (req, res) => {
       } else {
         // No record exists, perform an insert
         const insertQuery = `
-          INSERT INTO document_verification (
-            user_id, 
-            photo_verify, 
-            driving_verify, 
-            adhar_verify, 
-            certificate_verify, 
-            photo_review, 
-            driving_review, 
-            adhar_review, 
-            certificate_review,
-            pan_verify,
-            pan_review
-          ) 
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        `;
-  
-        const insertValues = [
-          userId,
-          photo_verify || null,
-          driving_verify || null,
-          adhar_verify || null,
-          certificate_verify || null,
-          photo_review || null,
-          driving_review || null,
-          adhar_review || null,
-          certificate_review || null
-        ];
-  
-        db.query(insertQuery, insertValues, (insertErr, insertResult) => {
-          if (insertErr) {
-            return res.status(500).send('Error inserting the record');
-          }
-          res.status(200).send('Record inserted successfully');
-        });
+        INSERT INTO document_verification (
+          user_id, 
+          photo_verify, 
+          driving_verify, 
+          adhar_verify, 
+          certificate_verify, 
+          photo_review, 
+          driving_review, 
+          adhar_review, 
+          certificate_review,
+          pan_verify,
+          pan_review,
+          created_at,
+          updated_at
+        ) 
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+      `;
+      
+      const insertValues = [
+        userId,
+        photo_verify || null,
+        driving_verify || null,
+        adhar_verify || null,
+        certificate_verify || null,
+        photo_review || null,
+        driving_review || null,
+        adhar_review || null,
+        certificate_review || null,
+        pan_verify || null, // Added this field
+        pan_review || null, // Added this field
+        new Date(), 
+        new Date(), 
+      ];
+      
+      db.query(insertQuery, insertValues, (insertErr, insertResult) => {
+        if (insertErr) {
+          console.error('Error inserting the record:', insertErr); // Log the error for debugging
+          return res.status(500).send('Error inserting the record');
+        }
+        res.status(200).send('Record inserted successfully');
+      });
       }
     });
-});
+});  
 
 
 // CREATE NEW CUSTOMER

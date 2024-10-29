@@ -333,6 +333,7 @@ const Login = ({history}) => {
                   className="security-image"
                   src="https://cdn-icons-png.flaticon.com/512/9767/9767164.png"
                   alt="Security"
+                  style={{height:"50%"}}
                 />
                 <h1>Welcome Back!</h1>
                 <p>Enter your personal details to use all of site features</p>

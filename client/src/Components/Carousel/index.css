@@ -291,6 +291,12 @@ h3 {
   border-radius: 15px;
 }
 
+.about-header{
+  background-image: url("https://www.nextvisual.com.my/wp-content/uploads/2017/11/about-us-banner-background-02-min.jpg");
+  background-size: cover;
+  padding: 20px;
+}
+
 .about-header,
 .mission-section,
 .choose-us-section,

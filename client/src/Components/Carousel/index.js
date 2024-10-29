@@ -547,11 +547,12 @@ const Carousel = () => {
       </div>
       <div style={{backgroundColor:"black", color: "white"}} className="page-footer">
         <p className="contact-us">Contact Us</p>
+        <p className="contact-us">© {new Date().getFullYear()} All rights reserved to <a target="_blank" href="https://beedatatech.com">BeedataTech.com</a></p>
         <div>
-          <SlSocialFacebook className="social-icon" />
-          <SlSocialInstagram className="social-icon" />
-          <TiSocialTwitter className="social-icon" />
-          <TiSocialLinkedin className="social-icon" />
+        <a style={{color: "white"}} target="_blank" href="https://www.facebook.com/profile.php?id=61567807704128"><SlSocialFacebook className="social-icon" /></a>
+        <SlSocialInstagram className="social-icon" />
+        <a style={{color: "white"}} target="_blank" href="https://x.com/Rideready2024"><TiSocialTwitter className="social-icon" /></a>
+        <a style={{color: "white"}} target="_blank" href="https://www.linkedin.com/in/rideready-beedata-98bb91334/"><TiSocialLinkedin className="social-icon" /></a>
           <SlSocialGoogle className="social-icon" />
         </div>
       </div>

@@ -35,19 +35,6 @@ router.post('/login', (req, res) => {
         );
 
         return res.json({ message: 'Login successful', user, token });
-
-        // const loginTime = new Date();
-        // const updateSql = 'UPDATE userdata SET lastlogin = ?, loginstatus = ?, logincount = logincount + 1 WHERE id = ?';
-
-        // db.query(updateSql, [loginTime, true, user.id], (updateErr) => {
-        //     if (updateErr) {
-        //         console.error('Error updating login time:', updateErr);
-        //         return res.status(500).json({ error: 'Internal Server Error' });
-        //     }
-        //     // Generate JWT token
-       
-
-        // });
     });
 });
 

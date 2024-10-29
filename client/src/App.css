@@ -1,6 +1,9 @@
 .App {
   text-align: center;
 }
+body {
+  padding-top: 82px; /* Same as navbar height */
+}
 
 .App-logo {
   height: 40vmin;

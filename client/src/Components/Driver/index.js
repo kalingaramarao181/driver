@@ -30,7 +30,7 @@ import UserDataAdmin from "../UserDataAdmin";
 import Notifications from "../Notifications";
 
 const Driver = (props) => {
-  const [sidebarButtonStatus, setSidebarButtonStatus] = useState("Notifications");
+  const [sidebarButtonStatus, setSidebarButtonStatus] = useState("DriverProfile");
   const [mapLocation, setMapLocation] = useState({lat:17.72834676147881,lng:83.30856055625414});
 
   const { isTablet, isDesktop } = useDeviceType();
